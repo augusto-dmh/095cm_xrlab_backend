@@ -1,0 +1,46 @@
+@startuml DER
+
+entity User {
+    id INT <<PK>>
+    isAdmin BOOLEAN
+    nickname VARCHAR(20) <<UK>>
+    password VARCHAR(20)
+    XP INT
+    --
+}
+
+entity Avatar {
+    id INT <<PK>>
+    userId INT <<FK>>
+    path TEXT
+    --
+}
+
+entity UserAvatar {
+    userId INT <<FK>>
+    AvatarId <<FK>>
+    --
+}
+
+entity UserPhoto {
+    userId INT <<FK>>
+    PhotoId INT <<FK>>
+    --
+}
+
+entity Photo {
+    id INT <<PK>>
+    userId INT <<FK>>
+    path TEXT
+    fileName <<UK>>
+    latitude FLOAT(10,6)
+    longitude FLOAT(10,6)
+    --
+}
+
+User --o{ UserPhoto
+User --o{ UserAvatar
+Avatar --o{ UserAvatar
+Photo --o{ UserPhoto
+
+@enduml
