@@ -4,6 +4,7 @@ CREATE DATABASE 095cm;
 CREATE TABLE IF NOT EXISTS users (
 	id INT,
     is_admin BOOLEAN,
+    selected_avatar INT <<FK>>
     nickname VARCHAR(20),
     password TEXT,
     xp INT
@@ -33,6 +34,7 @@ CREATE TABLE IF NOT EXISTS user_avatars (
 ALTER TABLE users
 ADD CONSTRAINT pk_users_id PRIMARY KEY (id),
 ADD CONSTRAINT uk_users_nickname UNIQUE KEY (nickname),
+ADD CONSTRAINT fk_users_selected_avatar FOREIGN KEY (selected_avatar) REFERENCES avatars(id) ON UPDATE CASCADE ON DELETE RESTRICT,
 ADD INDEX idx_users_nickname (nickname);
 
 ALTER TABLE photos

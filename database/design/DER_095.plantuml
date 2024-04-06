@@ -3,6 +3,7 @@
 entity User {
     id INT <<PK>>
     isAdmin BOOLEAN
+    selectedAvatar INT <<FK>>
     nickname VARCHAR(20) <<UK>>
     password TEXT
     XP INT
@@ -33,6 +34,7 @@ entity Photo {
 }
 
 User ||--o{ Photo
+User --|| Avatar
 User --o{ UserAvatar
 Avatar --o{ UserAvatar
 
