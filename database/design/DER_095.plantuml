@@ -13,7 +13,7 @@ entity User {
 entity Avatar {
     id INT <<PK>>
     name VARCHAR(30) <<UK>>
-    path TEXT
+    fileName <<UK>>
     --
 }
 
@@ -26,7 +26,6 @@ entity UserAvatar {
 entity Photo {
     id INT <<PK>>
     userId INT <<FK>>
-    path TEXT
     fileName <<UK>>
     latitude FLOAT
     longitude FLOAT

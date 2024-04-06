@@ -13,8 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS photos (
 	id INT,
     user_id INT,
-    path TEXT,
-    filename VARCHAR(255),
+    filename TEXT,
     latitude FLOAT,
     longitude FLOAT
 );
@@ -22,7 +21,7 @@ CREATE TABLE IF NOT EXISTS photos (
 CREATE TABLE IF NOT EXISTS avatars (
 	id INT,
     name VARCHAR(30),
-    url TEXT
+    filename TEXT,
 );
 
 CREATE TABLE IF NOT EXISTS user_avatars (
