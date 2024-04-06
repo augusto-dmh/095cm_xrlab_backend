@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon api/src/server.js | npx pino-pretty",
-    "build": "sucrase api/src -d ./dist --transforms imports",
+    "build": "sucrase ./api/src -d ./dist --transforms imports",
     "start": "node api/dist/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
