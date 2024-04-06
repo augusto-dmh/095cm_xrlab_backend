@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
 	id INT,
     is_admin BOOLEAN,
     nickname VARCHAR(20),
-    password VARCHAR(20),
+    password TEXT,
     xp INT
 );
 

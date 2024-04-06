@@ -4,7 +4,7 @@ entity User {
     id INT <<PK>>
     isAdmin BOOLEAN
     nickname VARCHAR(20) <<UK>>
-    password VARCHAR(20)
+    password TEXT
     XP INT
     --
 }
