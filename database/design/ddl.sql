@@ -21,12 +21,7 @@ CREATE TABLE IF NOT EXISTS photos (
 CREATE TABLE IF NOT EXISTS avatars (
 	id INT,
     name VARCHAR(30),
-    path TEXT
-);
-
-CREATE TABLE IF NOT EXISTS user_photos (
-	user_id INT,
-    photo_id INT
+    url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS user_avatars (
@@ -51,11 +46,6 @@ ALTER TABLE avatars
 ADD CONSTRAINT pk_avatars_id PRIMARY KEY (id),
 ADD CONSTRAINT uk_avatars_name UNIQUE KEY (name),
 ADD INDEX idx_avatars_name (name);
-
-ALTER TABLE user_photos
-ADD CONSTRAINT fk_user_photos_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
-ADD CONSTRAINT fk_user_photos_photo_id FOREIGN KEY (photo_id) REFERENCES photos(id) ON UPDATE CASCADE ON DELETE CASCADE,
-ADD CONSTRAINT cpk_user_photos PRIMARY KEY (user_id, photo_id);
 
 ALTER TABLE user_avatars
 ADD CONSTRAINT fk_user_avatars_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,

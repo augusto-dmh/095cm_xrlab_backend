@@ -22,12 +22,6 @@ entity UserAvatar {
     --
 }
 
-entity UserPhoto {
-    userId INT <<FK>>
-    PhotoId INT <<FK>>
-    --
-}
-
 entity Photo {
     id INT <<PK>>
     userId INT <<FK>>
@@ -38,9 +32,8 @@ entity Photo {
     --
 }
 
-User --o{ UserPhoto
+User ||--o{ Photo
 User --o{ UserAvatar
 Avatar --o{ UserAvatar
-Photo --o{ UserPhoto
 
 @enduml
