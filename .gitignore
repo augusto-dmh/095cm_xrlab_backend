@@ -1,0 +1,8 @@
+api/.env
+api/.prettierignore
+api/dist
+api/package-lock.json
+api/src/uploads
+api/uploads/images
+api/src/logging/logs.log
+node_modules
