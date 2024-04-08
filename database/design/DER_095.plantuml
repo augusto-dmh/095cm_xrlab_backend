@@ -6,14 +6,14 @@ entity User {
     selectedAvatar INT <<FK>>
     nickname VARCHAR(20) <<UK>>
     password TEXT
-    XP INT
+    xp INT
     --
 }
 
 entity Avatar {
     id INT <<PK>>
     name VARCHAR(30) <<UK>>
-    fileName <<UK>>
+    filename TEXT <<UK>>
     --
 }
 
@@ -26,7 +26,7 @@ entity UserAvatar {
 entity Photo {
     id INT <<PK>>
     userId INT <<FK>>
-    fileName <<UK>>
+    filename TEXT <<UK>>
     latitude FLOAT
     longitude FLOAT
     --
