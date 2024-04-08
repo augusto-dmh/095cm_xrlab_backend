@@ -1,4 +1,4 @@
-api/.env
+.env
 api/.prettierignore
 api/dist
 api/package-lock.json
