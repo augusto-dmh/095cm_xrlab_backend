@@ -104,6 +104,6 @@ export default class User extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.avatar, { foreignKey: "avatarId" });
+    this.belongsToMany(models.avatar, { foreignKey: "avatarId", through: "user_avatars" });
   }
 }
