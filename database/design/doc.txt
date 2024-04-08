@@ -1,0 +1,50 @@
+O banco de dados do projeto será formado pelas seguintes entidades: User, Avatar, Photo, UserAvatar.
+Segue descrição de cada uma das entidades e os dados de suas colunas, respectivamente:
+
+Users 
+- id: chave primária de tipo int. A intenção é ser armazenada para ser retornada ao client via jwt após uma autenticação 
+bem-sucedida, sendo então utilizada em chamadas de API relacionadas ao user (ex: para retornar qualquer dado do User, 
+inclusive Photos associadas a ele, bastaria uma consulta segundo seu ID).
+- isAdmin: dado de tipo boolean. Identifica um user como admin ou não. É utilizado para determinar se recursos de um 
+administrador aparecerão disponíveis para serem utilizados na aplicação (ex: uma aba para aceitação ou recusa de Photos 
+enviadas por Users).
+- selected_avatar: chave estrangeira que referencia a chave primária de Avatars 'id'. É utilizada para obtenção de qual avatar
+que um user possui está selecionado, permitindo sua exibição no perfil com base em uma url (a qual será montada
+por parte da api utilizando 'filename' de Avatars) para ser o valor do atributo 'src' de uma tag <img> no front-end.
+- nickname: chave única que identifica o nome-fantasia do user. É utilizado na criação de conta 
+e login próprio da aplicação.
+- password: dado de tipo text. É um hash da senha do user que é utilizado na criação de conta/login da aplicação.
+- xp: dado de tipo int. Trata-se da quantidade de pontos de experiência que o user possui. É utilizado para ser 
+consumido pelo frontend e usado como base para a mostragem de nível do user (ex: 100 de xp corresponde ao nível 5,
+mostrado em forma de emblema).
+
+Avatars
+- id: chave primária de tipo int. É utilizada para obter, junto aos dados próprios de User, os avatars que user possui 
+(user_avatars) e aquele que está selecionado ('selected_avatar'). 
+- name: chave única de tipo varchar(30). Contém o nome do avatar que será mostrado no front-end para o usuário final 
+('id' serve para queries "debaixo dos panos", mas não cairia bem mostrar ao usuário final que ele pode obter o avatar 2621).
+- filename: chave única de tipo text. Será usado para montagem de uma url no back-end que será utilizada para mostrar o avatar
+no front-end.
+
+Photos
+- id: chave primária de tipo int. Será usada para a identificação única de cada photo.
+- user_id: chave estrangeira que referencia a chave primária de User 'id'. É usada para a obtenção das photos que pertencem a um user.
+- filename: chave única de tipo text. É usado para montagem de uma url no back-end que é utilizada para mostrar a photo
+no front-end.
+- latitude & longitude: dados de tipo float. utilizados para carregamento de photos em determinadas locais do mapa no front-end.
+
+UserAvatar
+- tabela associativa para a obtenção de quais avatars um user possui.
+
+
+
+A relação entre essas entidades se dá da seguinte forma:
+
+Entre um user e uma photo a relação é one-to-many(0:N)/one-to-one(1:1), respectivamente: 
+- um user pode ter N photos (FK user_id em Photos);
+- uma photo deve pertencer a um e somente um user (FK user_id em Photos).
+
+Entre um user e um avatar existem duas relações distintas: one-to-one(1:1) e one-to-many(1:N)/(0:N), respectivamente:
+- um User deve estar com um e somente um avatar selecionado (FK selected_avatar em User);
+- um User deve ter um ou mais Avatars (tabela associativa User_avatars);
+- um avatar pode pertencer a um ou mais Users (tabela associativa User_avatars).
