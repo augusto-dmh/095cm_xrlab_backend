@@ -41,7 +41,7 @@ export const filename = {
 };
 
 export const latitude = {
-  nonFloat: "'latitude' must be a float..",
+  nonFloat: "'latitude' must be a float.",
 };
 
 export const longitude = {

@@ -28,7 +28,8 @@ export default async (req, res, next) => {
 
     const user = await User.findOne({ where: { id, email } });
 
-    if (!user) throw new ApiError(...errors.createInvalidTokenDecodedPayload(fullPath));
+    if (!user)
+      throw new ApiError(...errors.createInvalidTokenDecodedPayload(fullPath));
 
     req.userId = id;
     req.userEmail = email;

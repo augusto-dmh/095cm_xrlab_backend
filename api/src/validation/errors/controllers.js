@@ -8,18 +8,19 @@ export const createValidationError = (fields) =>
     400,
     "One or more fields contain invalid values.",
     `The fields '${fields}' contain invalid values.`,
-    uuidv4(),
+    uuidv4()
   );
 
 export const createUnexpectedError = (fileName) => {
-  const fileNameMatch = fileName.match(/src(.*)/) || fileName.match(/node_modules.*$/);
+  const fileNameMatch =
+    fileName.match(/src(.*)/) || fileName.match(/node_modules.*$/);
   return new Base(
     "/errors/server-unexpected-error",
     "Unexpected Error on Server",
     500,
     "An unexpected error occurred on the server. Please try again later.",
     `An unexpected error occurred on ${fileNameMatch[0]} - related to database, external services etc.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -30,7 +31,7 @@ export const createMissingAuthorization = (path) => {
     401,
     "'authorization' header is required.",
     `'authorization' header is required to access resource from ${path}.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -41,7 +42,7 @@ export const createInvalidAuthorizationFormat = (path) => {
     401,
     "'authorization' header format is invalid.",
     `'authorization' header sent to ${path} is invalid due to incorrect format. Please provide it in "Bearer [Token]" format`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -52,7 +53,7 @@ export const createInvalidToken = (path) => {
     401,
     "The token is invalid.",
     `The access token provided in headers sent to ${path} has been expired or tampered with.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -63,7 +64,7 @@ export const createInvalidTokenDecodedPayload = (path) => {
     401,
     "The token's decoded payload data is invalid",
     `The access token provided in headers sent to ${path} has invalid data: the 'user' object decoded do not exists anymore.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -74,7 +75,7 @@ export const createMissingId = (path) => {
     400,
     "'id' parameter is required.",
     `'id' parameter is required on ${path}. It's missing`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -85,7 +86,7 @@ export const createStudentNotFound = (id, path) => {
     404,
     "No Student has been found.",
     `Student ${id} has not been found on ${path}.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -96,7 +97,7 @@ export const createMissingCredentials = (path) => {
     400,
     "'email' and 'password' are required fields.",
     `'email' and 'password' are required on ${path}. One or both of them are missing,`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -107,7 +108,7 @@ export const createInvalidCredentials = () =>
     401,
     "'email' or/and 'password' invalid.",
     `'email' or/and 'password' are invalid. Provide valid credentials.`,
-    uuidv4(),
+    uuidv4()
   );
 
 export const createPasswordsNotMatch = () =>
@@ -117,7 +118,7 @@ export const createPasswordsNotMatch = () =>
     401,
     "Invalid password.",
     `An user with the provided email exists, but the password is wrong.`,
-    uuidv4(),
+    uuidv4()
   );
 
 export const createUserNotFound = (id, path) => {
@@ -127,7 +128,7 @@ export const createUserNotFound = (id, path) => {
     404,
     "No user has been found.",
     `User ${id} has not been found on ${path}.`,
-    uuidv4(),
+    uuidv4()
   );
 };
 
@@ -138,7 +139,7 @@ export const createInvalidPhotoType = () =>
     422,
     "File type not supported. Chose either PNG or JPG.",
     `The file type is not supported. Only PNG or JPG format is accepted.`,
-    uuidv4(),
+    uuidv4()
   );
 
 export const createInvalidPhotoSize = (path, limitMb) => {
@@ -148,6 +149,6 @@ export const createInvalidPhotoSize = (path, limitMb) => {
     422,
     `The photo exceeds the limit size (${limitMb}MB).`,
     `The file size of ${path} ultrapasses ${limitMb}MB. Please choose other image.`,
-    uuidv4(),
+    uuidv4()
   );
 };

@@ -85,7 +85,7 @@ export default class User extends Model {
       {
         sequelize,
         modelName: "user",
-      },
+      }
     );
 
     this.addHook("afterValidate", (user) => {
@@ -104,6 +104,9 @@ export default class User extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.avatar, { foreignKey: "avatarId", through: "user_avatars" });
+    this.belongsToMany(models.avatar, {
+      foreignKey: "avatarId",
+      through: "user_avatars",
+    });
   }
 }

@@ -1,13 +1,15 @@
 import User from "../models/User";
 import * as errors from "../validation/errors";
 import ApiError from "../validation/errors/classes/ApiError";
-import stacktrace from "stack-trace";
+import stacktrace, { parse } from "stack-trace";
 import ErrorContext from "../validation/errors/classes/ErrorContext";
 
 const store = async (req, res, next) => {
+  parseReqBody(req.body) = { nickname, selected_avatar, email, password, xp }
+
   try {
-    const newUser = await User.create(req.body);
-    const { id, name, email } = newUser;
+    const user = await User.create();
+    const { id, name, email } = user;
     res.json({ id, name, email });
   } catch (err) {
     const trace = stacktrace.parse(err);
@@ -88,10 +90,7 @@ const destroy = async (req, res, next) => {
 
 export default { store, index, show, update, destroy };
 
-/*
-index -> lista todos os usuários -> GET
-store/create -> cria um novo usuário -> POST
-delete -> apaga um usuário -> DELETE
-show -> mostra um usuário -> GET
-update -> atualiza um usuário -> PATCH ou PUT
-*/
+function parseReqBody(reqBody) {
+  const { nickname, selected_avatar, email, password, xp } = reqBody;
+  return [String(nickname), +selected_avatar, String(email), String(password), +xp];
+}

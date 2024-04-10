@@ -25,7 +25,7 @@ const logger = pino(
       level: (label) => ({ level: label.toUpperCase() }),
     },
   },
-  transport,
+  transport
 );
 
 export default logger;

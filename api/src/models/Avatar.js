@@ -45,13 +45,16 @@ export default class Avatar extends Model {
       {
         sequelize,
         modelName: "avatar",
-      },
+      }
     );
 
     return this;
   }
 
   static associate(models) {
-    this.belongsToMany(models.user, { foreignKey: "userId", through: "user_avatars" });
+    this.belongsToMany(models.user, {
+      foreignKey: "userId",
+      through: "user_avatars",
+    });
   }
 }

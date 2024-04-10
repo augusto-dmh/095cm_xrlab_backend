@@ -48,7 +48,7 @@ export default class Photo extends Model {
       {
         sequelize,
         modelName: "photo",
-      },
+      }
     );
     return this;
   }

@@ -24,7 +24,10 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/images/", express.static(path.resolve(__dirname, "..", "uploads", "images")));
+app.use(
+  "/images/",
+  express.static(path.resolve(__dirname, "..", "uploads", "images"))
+);
 app.use(cors(corsOptions));
 // app.use(helmet());
 

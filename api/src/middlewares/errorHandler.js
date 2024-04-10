@@ -1,5 +1,8 @@
 import { ValidationError } from "sequelize";
-import { createUnexpectedError, createValidationError } from "../validation/errors/controllers";
+import {
+  createUnexpectedError,
+  createValidationError,
+} from "../validation/errors/controllers";
 import ApiError from "../validation/errors/classes/ApiError";
 import logHandler from "../logging/handler";
 import Log from "../logging/Log";

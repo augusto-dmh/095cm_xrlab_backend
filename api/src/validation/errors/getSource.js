@@ -2,7 +2,8 @@ export default (trace) => {
   const srcError = /src(.*)/;
   const dependencyError = /node_modules.*$/;
   const traceFileName = trace[0].getFileName();
-  const fileNameMatch = traceFileName.match(srcError) || traceFileName.match(dependencyError);
+  const fileNameMatch =
+    traceFileName.match(srcError) || traceFileName.match(dependencyError);
 
   const functionName = trace[0].getFunctionName();
   const fileName = fileNameMatch[0];

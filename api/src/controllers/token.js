@@ -11,19 +11,23 @@ const store = async (req, res, next) => {
   const { email = "", password = "" } = req.body;
 
   if (!email || !password)
-    throw new ApiError(...errors.controllers.createMissingCredentials(fullPath));
+    throw new ApiError(
+      ...errors.controllers.createMissingCredentials(fullPath)
+    );
 
   try {
     const user = await User.findOne({ where: { email } });
 
-    if (!user) throw new ApiError(...errors.controllers.createInvalidCredentials());
+    if (!user)
+      throw new ApiError(...errors.controllers.createInvalidCredentials());
     // it would be more accurate to inform "Invalid credentials" on both, suggesting that at least one field is preventing the login,
     // or "No user found with matching email" at the validation above and "Wrong password" below, telling in which field
     // the problem lies and why.
 
     const passwordsMatch = await bcrypt.compare(password, user.password);
 
-    if (!passwordsMatch) throw new ApiError(...errors.controllers.createPasswordsNotMatch());
+    if (!passwordsMatch)
+      throw new ApiError(...errors.controllers.createPasswordsNotMatch());
 
     const { id } = user;
     const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
