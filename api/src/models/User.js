@@ -36,22 +36,9 @@ export default class User extends Model {
             },
           },
         },
-        email: {
-          type: DataTypes.STRING,
-          defaultValue: "",
-          unique: {
-            msg: errors.models.email.inUse,
-          },
-          validate: {
-            custom(value) {
-              if (!validations.isNotEmpty(value)) {
-                throw errors.models.email.empty;
-              }
-              if (!validations.isEmailValid(value)) {
-                throw errors.models.email.invalid;
-              }
-            },
-          },
+        isAdmin: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
         },
         password: {
           type: DataTypes.STRING,
