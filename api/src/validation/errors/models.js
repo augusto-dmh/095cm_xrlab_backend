@@ -56,3 +56,13 @@ export const password = {
   invalidLength: "Password must be between 6 and 50 characters.",
   empty: "'password' is required.",
 };
+
+export const xp = {
+  nonInteger: "'xp' must be an integer.",
+  empty: "'xp' is required.",
+};
+
+export const userId = {
+  nonInteger: "'userId' must be an integer.",
+  empty: "'userId' is required.",
+};

@@ -17,10 +17,10 @@ export default class User extends Model {
           validate: {
             custom(value) {
               if (!validations.isNotEmpty(value)) {
-                throw errors.models.name.empty;
+                throw errors.models.nickname.empty;
               }
               if (!validations.isLengthValid(value, 0, 20)) {
-                throw errors.models.name.invalidLength;
+                throw errors.models.nickname.invalidLength;
               }
             },
           },
@@ -60,10 +60,10 @@ export default class User extends Model {
           validate: {
             custom(value) {
               if (!validations.isNotEmpty(value)) {
-                throw errors.models.password.empty;
+                throw errors.models.xp.empty;
               }
               if (!validations.isLengthValid(value, 6, 60)) {
-                throw errors.models.password.invalidLength;
+                throw errors.models.xp.invalidLength;
               }
             },
           },
