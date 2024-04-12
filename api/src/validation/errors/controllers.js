@@ -152,3 +152,14 @@ export const createInvalidPhotoSize = (path, limitMb) => {
     uuidv4()
   );
 };
+
+export const createMissingFile = (path) => {
+  return new Base(
+    "/errors/photo-missing-file",
+    "Missing Photo File",
+    400,
+    `No photo has been sent. Please choose an image.`,
+    `No file with the name ‘photo’ has been submitted to ${path}. Please select an image.`,
+    uuidv4()
+  );
+};
