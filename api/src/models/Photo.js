@@ -2,6 +2,7 @@ import { Model, DataTypes } from "sequelize";
 import appConfig from "../config/appConfig";
 import * as validations from "../validation";
 import * as errors from "../validation/errors";
+import User from "./User";
 
 export default class Photo extends Model {
   static init(sequelize) {
@@ -48,6 +49,23 @@ export default class Photo extends Model {
               }
               if (!validations.isNumber(value)) {
                 throw errors.models.longitude.nonFloat;
+              }
+            },
+          },
+        },
+        userId: {
+          type: DataTypes.INTEGER,
+          references: {
+            model: User,
+            key: "id",
+          },
+          validate: {
+            custom(value) {
+              if (!validations.isNotEmpty(value)) {
+                throw errors.models.userId.empty;
+              }
+              if (!validations.isNumber(value)) {
+                throw errors.models.userId;
               }
             },
           },
