@@ -51,6 +51,7 @@ export const longitude = {
 };
 
 export const selectedAvatar = {
+  empty: "'selectedAvatar' is required.",
   nonExistent: "'avatar' do not exists.",
 };
 

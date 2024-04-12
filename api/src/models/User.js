@@ -28,8 +28,15 @@ export default class User extends Model {
         selected_avatar: {
           type: DataTypes.INTEGER,
           defaultValue: 1,
+          references: {
+            model: Avatar,
+            key: "id",
+          },
           validate: {
             custom(value) {
+              if (!validations.isNotEmpty(value)) {
+                throw errors.models.selectedAvatar.empty;
+              }
               if (!validations.itExists(value, "id", Avatar)) {
                 throw errors.models.selectedAvatar.nonExistent;
               }
