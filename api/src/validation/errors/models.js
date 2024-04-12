@@ -41,10 +41,12 @@ export const filename = {
 };
 
 export const latitude = {
+  empty: "'latitude' is required.",
   nonFloat: "'latitude' must be a float.",
 };
 
 export const longitude = {
+  empty: "'longitude' is required.",
   nonFloat: "'longitude' must be a float.",
 };
 

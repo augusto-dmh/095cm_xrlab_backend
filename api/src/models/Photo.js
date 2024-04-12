@@ -26,8 +26,12 @@ export default class Photo extends Model {
         },
         latitude: {
           type: DataTypes.FLOAT,
+          defaultValue: "",
           validate: {
             custom(value) {
+              if (!validations.isNotEmpty(value)) {
+                throw errors.models.latitude.empty;
+              }
               if (!validations.isNumber(value)) {
                 throw errors.models.latitude.nonFloat;
               }
@@ -36,8 +40,12 @@ export default class Photo extends Model {
         },
         longitude: {
           type: DataTypes.FLOAT,
+          defaultValue: "",
           validate: {
             custom(value) {
+              if (!validations.isNotEmpty(value)) {
+                throw errors.models.longitude.empty;
+              }
               if (!validations.isNumber(value)) {
                 throw errors.models.longitude.nonFloat;
               }
