@@ -3,17 +3,19 @@ import stacktrace from "stack-trace";
 import ErrorContext from "../validation/errors/classes/ErrorContext";
 import Log from "../logging/Log";
 import fs from "fs";
+import ApiError from "../validation/errors/classes/ApiError";
+import * as errors from "../validation/errors";
 
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
-  const { filename } = req.file;
   const [userId, latitude, longitude] = parseReqBody(req.body);
 
-  if (!req.file) {
-    throw new ApiError(...errors.controllers.createMissingFile(fullPath));
-  }
-
   try {
+    if (!req.file) {
+      throw new ApiError(...errors.controllers.createMissingFile(fullPath));
+    }
+    const { filename } = req.file;
+
     const photo = await Photo.create({ userId, filename, latitude, longitude });
 
     const trace = stacktrace.get();
