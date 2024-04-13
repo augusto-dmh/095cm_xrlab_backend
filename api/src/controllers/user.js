@@ -1,16 +1,26 @@
 import User from "../models/User";
 import * as errors from "../validation/errors";
 import ApiError from "../validation/errors/classes/ApiError";
-import stacktrace, { parse } from "stack-trace";
+import stacktrace from "stack-trace";
 import ErrorContext from "../validation/errors/classes/ErrorContext";
+import Photo from "../models/Photo";
+import Avatar from "../models/Avatar";
 
 const store = async (req, res, next) => {
-  parseReqBody(req.body) = { nickname, selected_avatar, email, password, xp }
+  const [nickname, isAdmin, selectedAvatar, password, xp] = parseReqBody(
+    req.body
+  );
 
   try {
-    const user = await User.create();
-    const { id, name, email } = user;
-    res.json({ id, name, email });
+    const user = await User.create({
+      nickname,
+      isAdmin,
+      selectedAvatar,
+      password,
+      xp,
+    });
+
+    res.json(user);
   } catch (err) {
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
@@ -21,7 +31,24 @@ const store = async (req, res, next) => {
 
 const index = async (req, res, next) => {
   try {
-    const users = await User.findAll({ attributes: ["id", "name", "email"] });
+    const users = await User.findAll({
+      attributes: { exclude: ["password"] },
+      include: [
+        { model: Photo, attributes: ["id", "url"] },
+        {
+          model: Avatar,
+          association: "selectedAvatar",
+          attributes: ["id", "url"],
+        },
+        {
+          as: "avatars",
+          model: Avatar,
+          through: { attributes: [] },
+          attributes: ["id", "url"],
+        },
+      ],
+    });
+
     res.json(users);
   } catch (err) {
     const trace = stacktrace.parse(err);
@@ -36,12 +63,29 @@ const show = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      include: [
+        { model: Photo, attributes: ["id", "url"] },
+        {
+          model: Avatar,
+          association: "selectedAvatar",
+          attributes: ["id", "url"],
+        },
+        {
+          as: "avatars",
+          model: Avatar,
+          through: { attributes: [] },
+          attributes: ["id", "url"],
+        },
+      ],
+    });
 
-    if (!user) throw new ApiError(...errors.controllers.createUserNotFound(id, fullPath));
+    if (!user)
+      throw new ApiError(
+        ...errors.controllers.createUserNotFound(id, fullPath)
+      );
 
-    const { name, email } = user;
-    res.json({ id, name, email });
+    res.json({ ...user.dataValues, password: undefined });
   } catch (err) {
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
@@ -52,16 +96,24 @@ const show = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const id = req.userId;
+  const [nickname, isAdmin, selectedAvatar, password, xp] = parseReqBody(
+    req.body
+  );
 
   try {
     const user = await User.findByPk(id);
 
     if (!user) throw new ApiError(...errors.controllers.createUserNotFound(id));
 
-    const updatedData = await user.update(req.body);
-    const { name, email } = updatedData;
+    const updatedUser = await user.update(
+      nickname,
+      isAdmin,
+      selectedAvatar,
+      password,
+      xp
+    );
 
-    res.json({ id, name, email });
+    res.json(updatedUser);
   } catch (err) {
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
@@ -79,7 +131,8 @@ const destroy = async (req, res, next) => {
     if (!user) throw new ApiError(...errors.controllers.createUserNotFound(id));
 
     await user.destroy();
-    res.json(null);
+
+    res.json(user);
   } catch (err) {
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
@@ -91,6 +144,13 @@ const destroy = async (req, res, next) => {
 export default { store, index, show, update, destroy };
 
 function parseReqBody(reqBody) {
-  const { nickname, selected_avatar, email, password, xp } = reqBody;
-  return [String(nickname), +selected_avatar, String(email), String(password), +xp];
+  const { nickname, isAdmin, selectedAvatar, email, password, xp } = reqBody;
+  return [
+    String(nickname),
+    +isAdmin,
+    +selectedAvatar,
+    String(email),
+    String(password),
+    +xp,
+  ];
 }
