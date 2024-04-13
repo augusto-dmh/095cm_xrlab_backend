@@ -1,5 +1,4 @@
 // only pure functions - handle the logic around send toasts outside.
-import { where } from "sequelize";
 import { z } from "zod";
 
 export const isLengthValid = (value, min, max) => {
@@ -11,9 +10,6 @@ export const isEmailValid = (email) => {
   const schema = z.string().email();
   return schema.safeParse(email).success;
 };
-
-export const isEmailUnique = (email, Model) =>
-  !Model.findOne({ where: { email } });
 
 export const isNumber = (value) => {
   const schema = z.number();
