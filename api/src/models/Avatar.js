@@ -53,7 +53,7 @@ export default class Avatar extends Model {
 
   static associate(models) {
     this.belongsToMany(models.user, {
-      foreignKey: "userId",
+      foreignKey: "avatarId",
       through: "user_avatars",
     });
   }
