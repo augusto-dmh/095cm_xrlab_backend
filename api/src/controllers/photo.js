@@ -22,7 +22,7 @@ const store = async (req, res, next) => {
     const log = new Log(201, "Photo created", trace);
     res.json(photo);
   } catch (err) {
-    fs.unlink(`./api/uploads/images/${filename}`, () => {});
+    req.file && fs.unlink(`./api/uploads/images/${filename}`, () => {});
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
 
