@@ -30,6 +30,12 @@ CREATE TABLE IF NOT EXISTS user_avatars (
 );
 
 -- Constraints --
+ALTER TABLE avatars
+MODIFY id INT NOT NULL AUTO_INCREMENT,
+ADD CONSTRAINT pk_avatars_id PRIMARY KEY (id),
+ADD CONSTRAINT uk_avatars_name UNIQUE KEY (name),
+ADD INDEX idx_avatars_name (name);
+
 ALTER TABLE users
 MODIFY id INT NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT pk_users_id PRIMARY KEY (id),
@@ -44,12 +50,6 @@ ADD CONSTRAINT fk_photos_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON U
 ADD INDEX idx_photos_user_id (user_id),
 ADD INDEX idx_photos_latitude (latitude),
 ADD INDEX idx_photos_longitude (longitude);
-
-ALTER TABLE avatars
-MODIFY id INT NOT NULL AUTO_INCREMENT,
-ADD CONSTRAINT pk_avatars_id PRIMARY KEY (id),
-ADD CONSTRAINT uk_avatars_name UNIQUE KEY (name),
-ADD INDEX idx_avatars_name (name);
 
 ALTER TABLE user_avatars
 ADD CONSTRAINT fk_user_avatars_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
