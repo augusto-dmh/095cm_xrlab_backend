@@ -30,7 +30,19 @@ const store = async (req, res, next) => {
   }
 };
 
-export default { store };
+const index = async (req, res, next) => {
+  try {
+    const photos = await Photo.findAll();
+    res.json(photos);
+  } catch (err) {
+    const trace = stacktrace.parse(err);
+    const errorContext = new ErrorContext(err, trace);
+
+    next(errorContext);
+  }
+};
+
+export default { store, index };
 
 function parseReqBody(reqBody) {
   const { userId, latitude, longitude } = reqBody;

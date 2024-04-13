@@ -7,5 +7,6 @@ const router = new Router();
 
 // router.post("/photos", loginRequired, uploadPhoto, photoController.store);
 router.post("/photos", uploadPhoto, photoController.store);
+router.get("/photos", photoController.index);
 
 export default router;
