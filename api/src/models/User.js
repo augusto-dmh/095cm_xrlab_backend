@@ -33,11 +33,11 @@ export default class User extends Model {
             key: "id",
           },
           validate: {
-            custom(value) {
+            async custom(value) {
               if (!validations.isNotEmpty(value)) {
                 throw errors.models.selectedAvatar.empty;
               }
-              if (!validations.itExists(value, "id", Avatar)) {
+              if (!(await validations.itExists(value, "id", Avatar))) {
                 throw errors.models.selectedAvatar.nonExistent;
               }
             },

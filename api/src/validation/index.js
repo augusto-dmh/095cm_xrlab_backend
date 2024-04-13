@@ -30,9 +30,7 @@ export const isNotEmpty = (value) => {
   return schema.safeParse(value).success;
 };
 
-export const itExists = (value, row, Model) =>
+export const itExists = async (value, field, Model) =>
   Model.findOne({
-    where: {
-      [row]: value,
-    },
+    where: { [field]: value },
   });
