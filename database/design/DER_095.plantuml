@@ -1,7 +1,7 @@
 @startuml DER
 
 entity User {
-    id INT <<PK>>
+    id BIGINT <<PK>>
     isAdmin BOOLEAN
     selectedAvatar INT <<FK>>
     nickname VARCHAR(20) <<UK>>
@@ -18,14 +18,14 @@ entity Avatar {
 }
 
 entity UserAvatar {
-    userId INT <<FK>>
-    AvatarId <<FK>>
+    userId BIGINT <<FK>>
+    AvatarId INT <<FK>>
     --
 }
 
 entity Photo {
-    id INT <<PK>>
-    userId INT <<FK>>
+    id BIGINT <<PK>>
+    userId BIGINT <<FK>>
     filename TEXT <<UK>>
     latitude FLOAT
     longitude FLOAT

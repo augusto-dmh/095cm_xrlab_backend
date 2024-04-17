@@ -2,7 +2,7 @@ O banco de dados do projeto será formado pelas seguintes entidades: User, Avata
 Segue descrição de cada uma das entidades e os dados de suas colunas, respectivamente:
 
 Users 
-- id: chave primária de tipo int. A intenção é ser armazenada para ser retornada ao client via jwt após uma autenticação 
+- id: chave primária de tipo bigint. A intenção é ser armazenada para ser retornada ao client via jwt após uma autenticação 
 bem-sucedida, sendo então utilizada em chamadas de API relacionadas ao user (ex: para retornar qualquer dado do User, 
 inclusive Photos associadas a ele, bastaria uma consulta segundo seu ID).
 - isAdmin: dado de tipo boolean. Identifica um user como admin ou não. É utilizado para determinar se recursos de um 
@@ -27,7 +27,7 @@ Avatars
 no front-end.
 
 Photos
-- id: chave primária de tipo int. Será usada para a identificação única de cada photo.
+- id: chave primária de tipo bigint. Será usada para a identificação única de cada photo.
 - user_id: chave estrangeira que referencia a chave primária de User 'id'. É usada para a obtenção das photos que pertencem a um user.
 - filename: chave única de tipo text. É usado para montagem de uma url no back-end que é utilizada para mostrar a photo
 no front-end.
