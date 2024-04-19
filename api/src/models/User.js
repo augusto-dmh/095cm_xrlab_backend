@@ -69,9 +69,6 @@ export default class User extends Model {
               if (!validations.isNotEmpty(value)) {
                 throw errors.models.xp.empty;
               }
-              if (!validations.isLengthValid(value, 6, 60)) {
-                throw errors.models.xp.invalidLength;
-              }
             },
           },
         },
