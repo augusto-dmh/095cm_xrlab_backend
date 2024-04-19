@@ -24,15 +24,14 @@ export default async (req, res, next) => {
       if (err) throw new ApiError(...errors.createInvalidToken(fullPath));
       return decoded;
     });
-    const { id, email } = data;
+    const { id } = data;
 
-    const user = await User.findOne({ where: { id, email } });
+    const user = await User.findByPk(id);
 
     if (!user)
       throw new ApiError(...errors.createInvalidTokenDecodedPayload(fullPath));
 
     req.userId = id;
-    req.userEmail = email;
 
     return next();
   } catch (err) {

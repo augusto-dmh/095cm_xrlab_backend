@@ -6,7 +6,7 @@ const router = new Router();
 
 router.post("/users", userController.store);
 router.get("/users", userController.index);
-router.get("/users/:id", userController.show);
+router.get("/users/user", loginRequired, userController.show);
 router.put("/users", loginRequired, userController.update);
 router.delete("/users", loginRequired, userController.destroy);
 

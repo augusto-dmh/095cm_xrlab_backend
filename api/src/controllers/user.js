@@ -60,7 +60,7 @@ const index = async (req, res, next) => {
 
 const show = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
-  const { id } = req.params;
+  const { userId: id } = req;
 
   try {
     const user = await User.findByPk(id, {
@@ -95,7 +95,7 @@ const show = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const id = req.userId;
+  const { userId: id } = req;
   const [nickname, isAdmin, selectedAvatar, password, xp] = parseReqBody(
     req.body
   );
@@ -123,7 +123,7 @@ const update = async (req, res, next) => {
 };
 
 const destroy = async (req, res, next) => {
-  const id = req.userId;
+  const { userId: id } = req;
 
   try {
     const user = await User.findByPk(id);
@@ -144,13 +144,6 @@ const destroy = async (req, res, next) => {
 export default { store, index, show, update, destroy };
 
 function parseReqBody(reqBody) {
-  const { nickname, isAdmin, selectedAvatar, email, password, xp } = reqBody;
-  return [
-    String(nickname),
-    +isAdmin,
-    +selectedAvatar,
-    String(email),
-    String(password),
-    +xp,
-  ];
+  const { nickname, isAdmin, selectedAvatar, password, xp } = reqBody;
+  return [String(nickname), +isAdmin, +selectedAvatar, String(password), +xp];
 }

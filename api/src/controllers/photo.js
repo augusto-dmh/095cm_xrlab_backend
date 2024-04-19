@@ -8,7 +8,8 @@ import * as errors from "../validation/errors";
 
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
-  const [userId, latitude, longitude] = parseReqBody(req.body);
+  const [latitude, longitude] = parseReqBody(req.body);
+  const { userId } = req;
 
   try {
     if (!req.file) {

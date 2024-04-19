@@ -95,8 +95,8 @@ export const createMissingCredentials = (path) => {
     "/errors/login-credentials",
     "Missing Credentials",
     400,
-    "'email' and 'password' are required fields.",
-    `'email' and 'password' are required on ${path}. One or both of them are missing,`,
+    "'nickname' and 'password' are required fields.",
+    `'nickname' and 'password' are required on ${path}. One or both of them are missing,`,
     uuidv4()
   );
 };
@@ -106,8 +106,8 @@ export const createInvalidCredentials = () =>
     "/errors/login-credentials",
     "Invalid Credentials",
     401,
-    "'email' or/and 'password' invalid.",
-    `'email' or/and 'password' are invalid. Provide valid credentials.`,
+    "'nickname' or/and 'password' invalid.",
+    `'nickname' or/and 'password' are invalid. Provide valid credentials.`,
     uuidv4()
   );
 
@@ -117,7 +117,7 @@ export const createPasswordsNotMatch = () =>
     "Passwords Not Match",
     401,
     "Invalid password.",
-    `An user with the provided email exists, but the password is wrong.`,
+    `An user with the provided nickname exists, but the password is wrong.`,
     uuidv4()
   );
 
