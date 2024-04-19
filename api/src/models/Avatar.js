@@ -2,6 +2,7 @@ import { Model, DataTypes } from "sequelize";
 import { hashSync } from "bcryptjs";
 import * as validations from "../validation";
 import * as errors from "../validation/errors";
+import appConfig from "../config/appConfig";
 
 export default class Avatar extends Model {
   static init(sequelize) {
