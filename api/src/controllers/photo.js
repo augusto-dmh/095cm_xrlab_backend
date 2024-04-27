@@ -10,12 +10,12 @@ const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
   const [latitude, longitude] = parseReqBody(req.body);
   const { userId } = req;
+  const { filename } = req.file;
 
   try {
     if (!req.file) {
       throw new ApiError(...errors.controllers.createMissingFile(fullPath));
     }
-    const { filename } = req.file;
 
     const photo = await Photo.create({ userId, filename, latitude, longitude });
 
