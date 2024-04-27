@@ -1,0 +1,54 @@
+ENDPOINTS:
+
+* HTTP METHOD [path]
+- motivo de existir
+- dados que devem ou podem estar no body (se for necessário um body)
+- exige ou não login
+
+
+-- photos
+
+* GET /photos
+- carregar todas as fotos da aplicação
+- sem body.
+- não exige
+
+* POST /photos
+- upload de photos
+- userId (integer), latitude (number), longitude (number), photo (file (.png or jpg))
+- exige
+
+
+-- users
+
+* GET /users
+- carregar todos os usuários da aplicação (incluindo dados relacionados (não registros de uma tabela, mas resultados de joins e subqueries), como o avatar selecionado e os avatares disponíveis para cada um deles)
+- sem body
+- não exige
+
+* GET /users/user
+- carregar os dados de um usuário (incluindo dados relacionados ``)
+- sem body
+- exige
+
+* POST /users
+- criar um novo usuário.
+- deve conter id (integer), nickname (string), selected_avatar (integer), isAdmin (boolean), password (string)
+- exige
+
+* PUT /users
+- atualizar dados de um usuário
+- pode conter id (integer), nickname (string), selected_avatar (integer), isAdmin (boolean), password (string)
+- exige
+
+* DELETE /users
+- deletar um usuário
+- sem body
+- exige
+
+-- tokens
+
+* POST /tokens
+- criar um jwt token.
+- deve conter nickname (string) e password (string) referente a um usuário da aplicação.
+- não exige
