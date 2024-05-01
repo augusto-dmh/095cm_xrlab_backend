@@ -15,7 +15,7 @@ ENDPOINTS:
 
 * POST /photos
 - upload de photos
-- userId (integer), latitude (number), longitude (number), photo (file (.png or jpg))
+- latitude (number), longitude (number), photo (file (.png or jpg))
 - exige
 
 

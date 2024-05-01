@@ -46,6 +46,6 @@ const index = async (req, res, next) => {
 export default { store, index };
 
 function parseReqBody(reqBody) {
-  const { userId, latitude, longitude } = reqBody;
-  return [+userId, +latitude, +longitude];
+  const { latitude, longitude } = reqBody;
+  return [+latitude, +longitude];
 }
