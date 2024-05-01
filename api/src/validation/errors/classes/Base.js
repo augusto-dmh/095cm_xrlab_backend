@@ -10,13 +10,9 @@ class Base {
   }
 
   *[Symbol.iterator]() {
-    yield this.type;
-    yield this.title;
-    yield this.status;
-    yield this.message;
-    yield this.detail;
-    yield this.requestId;
-    yield this.subErrors;
+    for (const value of Object.values(this)) {
+      yield value;
+    }
   }
 }
 
