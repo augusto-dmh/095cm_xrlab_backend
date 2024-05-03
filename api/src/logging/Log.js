@@ -10,7 +10,11 @@ class Log {
     this.detail = detail;
     this.source = { functionName, fileName, lineNumber };
     this.build_info = process.versions.node;
-    this.commitHash = execSync("git rev-parse HEAD").toString().trim();
+    try {
+      this.commitHash = execSync("git rev-parse HEAD");
+    } catch (err) {
+      this.commitHash = "No commit found (maybe not a git repository).";
+    }
     this.requestId = uuidv4();
     this.stack = stack;
   }
