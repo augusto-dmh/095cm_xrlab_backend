@@ -1,3 +1,32 @@
+HOW TO SET THE API:
+
+1 - Clone the repository located at https://github.com/augusto-dmh/conexao095_xrlab_backend
+
+2 - Create the MYSQL database (execute each of the commands from top to bottom).
+
+2 - Run “npm install” to install the project dependencies.
+
+3 - Create a .env file at the root of the application containing the following items:
+
+NODE_ENV=development LOG_LEVEL=info
+DATABASE=your_database_name (e.g., conexao095)
+DATABASE_HOST=ip_where_your_db_is_hosted (e.g., 127.0.0.1)
+DATABASE_PORT=port_where_your_db_is_hosted (e.g., 3306)
+DATABASE_USERNAME=your_db_user (e.g., root)
+DATABASE_PASSWORD=db_password (e.g., kaksjdajskdsakldj)
+TOKEN_SECRET=random_and_strong_character_sequence (e.g., &ds7a89duj9jdsads8790ad&AD)(AD) TOKEN_EXPIRATION=how_long_the_authentication_token_takes_to_expire (e.g., 7d, 1y, 1h…)
+APP_URL=url_where_the_application_is_accessible_on_the_web (e.g., http://localhost:3000)
+APP_PORT=port_where_the_application_listens_for_requests (e.g., 3000)
+
+4 - In api/src/app.js, in the following instruction:
+
+const whitelist = [];
+Add within the array a string containing the URL where the frontend is hosted (e.g., https://localhost:5173)
+
+5 - Run ‘npm run dev’ at the root of the project.
+
+
+
 ENDPOINTS:
 
 * HTTP METHOD [path]
