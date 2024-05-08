@@ -11,7 +11,7 @@ class Log {
     this.source = { functionName, fileName, lineNumber };
     this.build_info = process.versions.node;
     try {
-      this.commitHash = execSync("git rev-parse HEAD");
+      this.commitHash = execSync("git rev-parse HEAD").toString().trim();
     } catch (err) {
       this.commitHash = "No commit found (maybe not a git repository).";
     }
