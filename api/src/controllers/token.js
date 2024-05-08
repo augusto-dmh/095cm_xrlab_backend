@@ -11,12 +11,12 @@ const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
   const { nickname = "", password = "" } = req.body;
 
-  if (!nickname || !password)
-    throw new ApiError(
-      ...errors.controllers.createMissingCredentials(fullPath)
-    );
-
   try {
+    if (!nickname || !password)
+      throw new ApiError(
+        ...errors.controllers.createMissingCredentials(fullPath)
+      );
+
     const user = await User.findOne({ where: { nickname } });
 
     if (!user)
