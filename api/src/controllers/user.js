@@ -7,9 +7,7 @@ import Photo from "../models/Photo";
 import Avatar from "../models/Avatar";
 
 const store = async (req, res, next) => {
-  const [nickname, isAdmin, selectedAvatar, password, xp] = parseReqBody(
-    req.body
-  );
+  const { nickname, isAdmin, selectedAvatar, password, xp } = req.body;
 
   try {
     const user = await User.create({
@@ -96,9 +94,7 @@ const show = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const { userId: id } = req;
-  const [nickname, isAdmin, selectedAvatar, password, xp] = parseReqBody(
-    req.body
-  );
+  const { nickname, isAdmin, selectedAvatar, password, xp } = req.body;
 
   try {
     const user = await User.findByPk(id);
@@ -142,8 +138,3 @@ const destroy = async (req, res, next) => {
 };
 
 export default { store, index, show, update, destroy };
-
-function parseReqBody(reqBody) {
-  const { nickname, isAdmin, selectedAvatar, password, xp } = reqBody;
-  return [String(nickname), +isAdmin, +selectedAvatar, String(password), +xp];
-}

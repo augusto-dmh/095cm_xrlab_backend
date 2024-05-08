@@ -8,7 +8,7 @@ import * as errors from "../validation/errors";
 
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
-  const [latitude, longitude] = parseReqBody(req.body);
+  const { latitude, longitude } = req.body;
   const { userId } = req;
   const { filename } = req.file;
 
@@ -44,8 +44,3 @@ const index = async (req, res, next) => {
 };
 
 export default { store, index };
-
-function parseReqBody(reqBody) {
-  const { latitude, longitude } = reqBody;
-  return [+latitude, +longitude];
-}
