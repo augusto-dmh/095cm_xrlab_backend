@@ -9,14 +9,9 @@ import ErrorContext from "../validation/errors/classes/ErrorContext";
 // refactor to make these validations be made with express-validator
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
-  const { nickname = "", password = "" } = req.body;
+  const { nickname, password } = req.body;
 
   try {
-    if (!nickname || !password)
-      throw new ApiError(
-        ...errors.controllers.createMissingCredentials(fullPath)
-      );
-
     const user = await User.findOne({ where: { nickname } });
 
     if (!user)

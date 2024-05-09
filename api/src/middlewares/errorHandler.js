@@ -1,4 +1,4 @@
-import { ValidationError } from "sequelize";
+import { UniqueConstraintError, ValidationError } from "sequelize";
 import {
   createUnexpectedError,
   createValidationError,
@@ -6,9 +6,39 @@ import {
 import ApiError from "../validation/errors/classes/ApiError";
 import logHandler from "../logging/handler";
 import Log from "../logging/Log";
+import { validationResult } from "express-validator";
+import { v4 as uuidv4 } from "uuid";
 
 /* eslint-disable no-unused-vars */ // error-handling middleware demands "next" to work.
 export default ({ err, trace }, req, res, next) => {
+  const validationRes = validationResult(req);
+
+  if (!validationRes.isEmpty()) {
+    const errorFields = validationRes.array().map((e) => e.path);
+    const validationError = createValidationError(errorFields);
+    validationError.requestId = uuidv4();
+    validationError.subErrors = validationRes.array().map((e) => e.msg);
+    const { status, detail } = err;
+
+    const log = new Log(status, detail, trace, err.stack);
+    logHandler(log, "error");
+
+    res.status(400).json({ error: { ...validationError, detail: undefined } });
+    return;
+  }
+
+  if (
+    err.name === "SequelizeUniqueConstraintError" ||
+    err.name === "SequelizeForeignKeyConstraintError"
+  ) {
+    const { status, detail } = createValidationError(err.fields.join(", "));
+    const log = new Log(status, detail, trace, err.stack);
+    logHandler(log, "error");
+
+    res.status(400).json({ error: { ...err, detail: undefined } });
+    return;
+  }
+
   if (err instanceof ValidationError) {
     const subErrors = [];
     const fields = [];

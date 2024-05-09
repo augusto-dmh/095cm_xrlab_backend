@@ -14,16 +14,6 @@ export default class User extends Model {
           unique: {
             msg: errors.models.nickname.inUse,
           },
-          validate: {
-            custom(value) {
-              if (!validations.isNotEmpty(value)) {
-                throw errors.models.nickname.empty;
-              }
-              if (!validations.isLengthValid(value, 0, 20)) {
-                throw errors.models.nickname.invalidLength;
-              }
-            },
-          },
         },
         selected_avatar: {
           type: DataTypes.INTEGER,
@@ -31,16 +21,6 @@ export default class User extends Model {
           references: {
             model: Avatar,
             key: "id",
-          },
-          validate: {
-            async custom(value) {
-              if (!validations.isNotEmpty(value)) {
-                throw errors.models.selectedAvatar.empty;
-              }
-              if (!(await validations.itExists(value, "id", Avatar))) {
-                throw errors.models.selectedAvatar.nonExistent;
-              }
-            },
           },
         },
         isAdmin: {
@@ -50,27 +30,10 @@ export default class User extends Model {
         password: {
           type: DataTypes.STRING,
           defaultValue: "",
-          validate: {
-            custom(value) {
-              if (!validations.isNotEmpty(value)) {
-                throw errors.models.password.empty;
-              }
-              if (!validations.isLengthValid(value, 6, 60)) {
-                throw errors.models.password.invalidLength;
-              }
-            },
-          },
         },
         xp: {
           type: DataTypes.INTEGER,
           defaultValue: 0,
-          validate: {
-            custom(value) {
-              if (!validations.isNotEmpty(value)) {
-                throw errors.models.xp.empty;
-              }
-            },
-          },
         },
       },
       {
