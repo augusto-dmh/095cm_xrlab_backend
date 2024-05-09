@@ -7,13 +7,19 @@ import Photo from "../models/Photo";
 import Avatar from "../models/Avatar";
 
 const store = async (req, res, next) => {
-  const { nickname, isAdmin, selectedAvatar, password, xp } = req.body;
+  const {
+    nickname,
+    isAdmin,
+    selectedAvatar: selected_avatar,
+    password,
+    xp,
+  } = req.body;
 
   try {
     const user = await User.create({
       nickname,
       isAdmin,
-      selectedAvatar,
+      selected_avatar,
       password,
       xp,
     });
