@@ -81,3 +81,102 @@ ENDPOINTS:
 - criar um jwt token.
 - deve conter nickname (string) e password (string) referente a um usuário da aplicação.
 - não exige
+
+
+
+PROJECT TECHNOLOGIES:
+
+-- Production dependencies:
+
+* express
+- It's a minimal and flexible Node.js web application framework that provides a robust set of features for
+building web and mobile applications. It facilitates the development of APIs and web servers in Node.js.
+
+* sequelize
+- It's a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server.
+It features solid transaction support, relations, eager and lazy loading, read replication, and more.
+
+* bcryptjs
+- It's a library to help hash passwords securely. It's a JavaScript implementation of the bcrypt password hashing function.
+
+* cors
+- It's a Node.js package that enables Cross-Origin Resource Sharing (CORS) for Express.js.
+It allows you to control how your server handles cross-origin requests.
+
+* dotenv
+- It's a zero-dependency module that loads environment variables from a .env file into process.env.
+Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
+
+* express-validator
+- It's a set of express.js middleware for input validation and sanitization.
+It is based on validator.js and is heavily inspired by Laravel's validation syntax.
+
+* helmet
+- It's a collection of 14 smaller middleware functions that set HTTP headers
+to secure Express/Connect apps by setting various HTTP headers.
+
+* jsonwebtoken
+- It's an implementation of JSON Web Tokens (JWT) to enable stateless authentication.
+It is used to create and verify tokens in Node.js.
+
+* multer
+- It's a middleware for handling multipart/form-data, which is primarily used for
+uploading files. It integrates seamlessly with Express.
+
+* lodash
+- It's a modern JavaScript utility library delivering modularity, performance & extras.
+It provides utility functions for common programming tasks.
+
+* mariadb
+- It's a MySQL-compatible relational database management system made by the original
+developers of MySQL. It's designed as a drop-in replacement for MySQL.
+
+* pino
+- It's a logger for Node.js with extremely low overhead. It also provides a pretty-printer
+to format logs for better readability during development.
+
+* query-string
+- It's a library to parse and stringify URL query strings. It provides a simple way to handle
+query parameters in the browser and Node.js.
+
+* stack-trace
+- It's a utility to generate stack traces in Node.js.
+
+* uuid
+- It's a library to generate RFC compliant UUIDs.
+
+* zod
+- It's a TypeScript-first schema declaration and validation library.
+It is designed to be lightweight and very fast.
+
+
+-- Development dependencies:
+
+* eslint
+- It's a static code analysis tool for identifying problematic patterns in JavaScript code. It's
+highly configurable and widely used for enforcing coding styles and catching common programming errors.
+
+* eslint-config-airbnb-base
+- I's a set of ESLint rules based on Airbnb's style guide. It provides
+a solid foundation for JavaScript projects, ensuring consistency and readability across codebases.
+
+* eslint-config-prettier
+- It disables ESLint rules that may conflict with Prettier, a code formatter. It allows Prettier to format code without interference from other ESLint rules.
+
+* eslint-plugin-import
+- It's an ESLint plugin that provides linting rules for import/export syntax, path resolution, and module loading.
+
+* nodemon
+- It's a utility that monitors for changes in Node.js applications and automatically restarts the server when files are modified. It's commonly used during development to streamline the development workflow.
+
+* pino-pretty
+- I's a utility for formatting Pino logs in a human-readable format. It enhances the readability of log messages during development.
+
+* prettier
+- It's an opinionated code formatter that supports various languages, including JavaScript. It enforces a consistent code style by parsing code and re-printing it with its own rules.
+
+* sequelize-cli
+- It's the Command Line Interface for Sequelize, an ORM for Node.js. It provides commands for managing database migrations, seeds, and generating models and migration files.
+
+* sucrase
+- It's a super-fast Babel alternative that makes development with modern JavaScript syntax more efficient. It allows developers to use features like import/export syntax without the need for transpilation in development environments.
