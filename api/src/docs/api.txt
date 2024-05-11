@@ -180,3 +180,52 @@ a solid foundation for JavaScript projects, ensuring consistency and readability
 
 * sucrase
 - It's a super-fast Babel alternative that makes development with modern JavaScript syntax more efficient. It allows developers to use features like import/export syntax without the need for transpilation in development environments.
+
+
+
+DIRECTORY STRUCTURE:
+
++---src
+    +---config
+    +---controllers
+    +---database
+        +---migrations
+        +---seeds
+    +---docs
+    +---logging
+    +---middlewares
+    +---models
+    +---routes
+    +---validation
+        +---errors
+            +---classes
+    +---uploads
+        +---images
+
+
+* `src/config` - Contains all the configuration files for the application (files like database config).
+
+* `src/controllers` - Contains all the controllers (files for handling the data provided by the request,
+
+applying some validations and providing a response to the client) for the application.
+
+* `src/database` - Contains all the database files for the application.
+    * `src/database/migrations` - Contains all the migration files for the application (files for easily management and set of the database schema).
+    * `src/database/seeds` - Contains all the seed files for the application (files for easily creation of database mock data).
+
+* `src/docs` - Contains all the documentation files for the application (docs like the database description).
+
+* `src/logging` - Contains all the logging files for the application (useful for improving debugging and analysis of the api consuming).
+
+* `src/middlewares` - Contains all the middleware files for the application (files for handling request data before it reaches the controller).
+
+* `src/models` - Contains all the models files for the application (files for handling data from database tables).
+
+* `src/routes` - Contains all the routes files for the application (files for handling the routing logic: when a GET request reaches '/users', what should be done?).
+
+* `src/validation` - Contains all the validation files for the application (files containing validations, like if a row in a certain table exists in the database).
+    * `src/validation/errors` - Contains all the error objects bases (used when creating and throwing api errors).
+        * `src/validation/errors/classes` - Contains all the error-related classes from the api (like Base, which is used in the api error base objects).
+
+* `src/uploads` - Contains all the uploaded files for the application.
+    * `src/uploads/images` - Contains all the uploaded images for the application (like the users photos).
