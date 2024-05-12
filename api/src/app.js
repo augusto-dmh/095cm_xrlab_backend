@@ -7,6 +7,7 @@ import cors from "cors";
 // import helmet from 'helmet'
 import routes from "./routes/index";
 import errorHandler from "./middlewares/errorHandler";
+import rateLimiter from "./middlewares/rateLimiter";
 
 const whitelist = [];
 
@@ -31,6 +32,7 @@ app.use(
 app.use(cors(corsOptions));
 // app.use(helmet());
 
+app.use(rateLimiter);
 app.use(routes);
 app.use(errorHandler);
 

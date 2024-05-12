@@ -24,6 +24,17 @@ export const createUnexpectedError = (fileName) => {
   );
 };
 
+export const createRateLimiter = () => {
+  return new Base(
+    "/errors/rate-limit-reached",
+    "Request Rate Limit Reached",
+    429,
+    "The request rate limit has been reached. Please try again later.",
+    `The request rate limit, which is 100 requests in 24 hours, has been reached.`,
+    uuidv4()
+  );
+};
+
 export const createMissingAuthorization = (path) => {
   return new Base(
     "/errors/authorization-failed",
