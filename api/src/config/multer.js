@@ -1,6 +1,4 @@
 import multer, { MulterError } from "multer";
-import path from "path";
-import { v4 as uuidv4 } from "uuid";
 
 export default {
   fileFilter: (req, file, cb) => {
@@ -13,12 +11,5 @@ export default {
   limits: {
     fileSize: 1024 * 1024 * 5,
   },
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, "..", "..", "uploads", "images"));
-    },
-    filename: (req, file, cb) => {
-      cb(null, `${uuidv4()}${path.extname(file.originalname)}`);
-    },
-  }),
+  storage: multer.memoryStorage(),
 };
