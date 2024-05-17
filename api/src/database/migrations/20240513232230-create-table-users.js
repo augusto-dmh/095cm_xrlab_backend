@@ -11,10 +11,12 @@ module.exports = {
       is_admin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
       },
       selected_avatar: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
+        defaultValue: 1,
       },
       nickname: {
         type: Sequelize.STRING(20),
@@ -28,6 +30,7 @@ module.exports = {
       xp: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,
