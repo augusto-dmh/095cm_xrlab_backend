@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS photos (
     user_id BIGINT UNSIGNED NOT NULL,
     filename TEXT NOT NULL,
     latitude FLOAT NOT NULL,
-    longitude FLOAT NOT NULL
+    longitude FLOAT NOT NULL,
+    CHECK (latitude >= -90 AND latitude <= 90),
+    CHECK (longitude >= -180 AND longitude <= 180),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

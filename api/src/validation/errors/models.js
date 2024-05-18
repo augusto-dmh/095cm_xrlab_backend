@@ -43,11 +43,13 @@ export const filename = {
 export const latitude = {
   empty: "'latitude' is required.",
   nonFloat: "'latitude' must be a float.",
+  invalidRange: "'latitude' must be a number between -90 and 90.",
 };
 
 export const longitude = {
   empty: "'longitude' is required.",
   nonFloat: "'longitude' must be a float.",
+  invalidRange: "'longitude' must be a number between -180 and 180.",
 };
 
 export const selectedAvatar = {

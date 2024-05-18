@@ -36,6 +36,9 @@ export default class Photo extends Model {
               if (!validations.isNumber(value)) {
                 throw errors.models.latitude.nonFloat;
               }
+              if (!validations.isLatitude(value)) {
+                throw errors.models.latitude.invalidRange;
+              }
             },
           },
         },
@@ -49,6 +52,9 @@ export default class Photo extends Model {
               }
               if (!validations.isNumber(value)) {
                 throw errors.models.longitude.nonFloat;
+              }
+              if (!validations.isLongitude(value)) {
+                throw errors.models.longitude.invalidRange;
               }
             },
           },
