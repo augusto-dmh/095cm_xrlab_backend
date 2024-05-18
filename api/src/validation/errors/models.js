@@ -10,6 +10,10 @@ export const nickname = {
   inUse: "'nickname' already in use. Please try another.",
 };
 
+export const isAdmin = {
+  nonBoolean: "'isAdmin' must be a boolean value.",
+};
+
 export const lastName = {
   invalidLength: "'lastName' must be between 3 and 255 characters.",
   empty: "'lastName' is required.",

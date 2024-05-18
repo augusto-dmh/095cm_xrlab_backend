@@ -20,7 +20,16 @@ const fieldsValidation = [
       .escape(),
   ],
   [
+    body("isAdmin")
+      .optional()
+      .isBoolean()
+      .withMessage(errors.isAdmin.nonBoolean)
+      .bail()
+      .escape(),
+  ],
+  [
     body("selectedAvatar")
+      .optional()
       .notEmpty()
       .withMessage(errors.selectedAvatar.empty)
       .bail()
@@ -37,6 +46,7 @@ const fieldsValidation = [
   ],
   [
     body("xp")
+      .optional()
       .notEmpty()
       .withMessage(errors.xp.empty)
       .bail()
