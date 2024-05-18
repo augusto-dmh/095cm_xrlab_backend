@@ -57,10 +57,19 @@ export default class User extends Model {
     });
 
     this.addScope("defaultScope", {
-      attributes: { exclude: ["password", "selected_avatar"] },
+      attributes: { exclude: ["selected_avatar"] },
       include: [
         { model: Avatar, as: "selectedAvatar", attributes: ["id", "url"] },
-        { model: Photo, attributes: ["id", "url"] },
+      ],
+    });
+    this.addScope("noPassword", {
+      attributes: { exclude: ["password"] },
+    });
+    this.addScope("photos", {
+      include: [{ model: Photo, attributes: ["id", "url"] }],
+    });
+    this.addScope("avatars", {
+      include: [
         {
           model: Avatar,
           as: "avatars",
