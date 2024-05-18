@@ -27,18 +27,6 @@ export default ({ err, trace }, req, res, next) => {
     return;
   }
 
-  if (
-    err.name === "SequelizeUniqueConstraintError" ||
-    err.name === "SequelizeForeignKeyConstraintError"
-  ) {
-    const { status, detail } = createValidationError(err.fields.join(", "));
-    const log = new Log(status, detail, trace, err.stack);
-    logHandler(log, "error");
-
-    res.status(400).json({ error: { ...err, detail: undefined } });
-    return;
-  }
-
   if (err instanceof ValidationError) {
     const subErrors = [];
     const fields = [];

@@ -3,6 +3,7 @@ import { hashSync } from "bcryptjs";
 import * as validations from "../validation";
 import * as errors from "../validation/errors";
 import Avatar from "./Avatar";
+import { itExists } from "./../validation/index";
 
 export default class User extends Model {
   static init(sequelize) {
@@ -18,6 +19,14 @@ export default class User extends Model {
         selected_avatar: {
           type: DataTypes.INTEGER,
           defaultValue: 1,
+          validate: {
+            itExists: async function (value) {
+              const avatar = await Avatar.findByPk(value);
+              if (!avatar) {
+                throw new Error(errors.models.selectedAvatar.nonExistent);
+              }
+            },
+          },
           references: {
             model: Avatar,
             key: "id",
