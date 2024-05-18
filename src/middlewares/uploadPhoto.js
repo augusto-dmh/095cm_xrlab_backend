@@ -37,7 +37,7 @@ export default (req, res, next) => {
 
     try {
       const filename = `${uuidv4()}${path.extname(req.file.originalname)}`;
-      const saveTo = path.resolve(__dirname, "..", "..", "uploads", "images");
+      const saveTo = path.resolve(__dirname, "..", "public", "photos");
       const filePath = path.join(saveTo, filename);
 
       await sharp(req.file.buffer).jpeg({ quality: 20 }).toFile(filePath);

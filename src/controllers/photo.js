@@ -5,6 +5,7 @@ import Log from "../logging/Log";
 import fs from "fs";
 import ApiError from "../validation/errors/classes/ApiError";
 import * as errors from "../validation/errors";
+import path from "path";
 
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
@@ -23,7 +24,11 @@ const store = async (req, res, next) => {
     const log = new Log(201, "Photo created", trace);
     res.json(photo);
   } catch (err) {
-    req.file && fs.unlink(`./api/uploads/images/${filename}`, () => {});
+    req.file &&
+      fs.unlink(
+        path.resolve(__dirname, "..", "public", "photos", filename),
+        () => {}
+      );
     const trace = stacktrace.parse(err);
     const errorContext = new ErrorContext(err, trace);
 

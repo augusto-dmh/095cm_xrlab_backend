@@ -22,7 +22,7 @@ export default class Photo extends Model {
         url: {
           type: DataTypes.VIRTUAL,
           get() {
-            return `${appConfig.url}/images/${this.getDataValue("filename")}`;
+            return `${appConfig.url}/photos/${this.getDataValue("filename")}`;
           },
         },
         latitude: {
