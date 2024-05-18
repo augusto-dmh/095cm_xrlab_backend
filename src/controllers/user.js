@@ -35,23 +35,7 @@ const store = async (req, res, next) => {
 
 const index = async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: { exclude: ["password"] },
-      include: [
-        { model: Photo, attributes: ["id", "url"] },
-        {
-          model: Avatar,
-          association: "selectedAvatar",
-          attributes: ["id", "url"],
-        },
-        {
-          as: "avatars",
-          model: Avatar,
-          through: { attributes: [] },
-          attributes: ["id", "url"],
-        },
-      ],
-    });
+    const users = await User.findAll();
 
     res.json(users);
   } catch (err) {
@@ -67,22 +51,7 @@ const show = async (req, res, next) => {
   const { userId: id } = req;
 
   try {
-    const user = await User.findByPk(id, {
-      include: [
-        { model: Photo, attributes: ["id", "url"] },
-        {
-          model: Avatar,
-          association: "selectedAvatar",
-          attributes: ["id", "url"],
-        },
-        {
-          as: "avatars",
-          model: Avatar,
-          through: { attributes: [] },
-          attributes: ["id", "url"],
-        },
-      ],
-    });
+    const user = await User.findByPk(id);
 
     if (!user)
       throw new ApiError(

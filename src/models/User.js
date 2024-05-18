@@ -4,6 +4,7 @@ import * as validations from "../validation";
 import * as errors from "../validation/errors";
 import Avatar from "./Avatar";
 import { itExists } from "./../validation/index";
+import Photo from "./Photo";
 
 export default class User extends Model {
   static init(sequelize) {
@@ -53,6 +54,20 @@ export default class User extends Model {
 
     this.addHook("afterValidate", (user) => {
       user.password = hashSync(user.password, 10);
+    });
+
+    this.addScope("defaultScope", {
+      attributes: { exclude: ["password", "selected_avatar"] },
+      include: [
+        { model: Avatar, as: "selectedAvatar", attributes: ["id", "url"] },
+        { model: Photo, attributes: ["id", "url"] },
+        {
+          model: Avatar,
+          as: "avatars",
+          through: { attributes: [] },
+          attributes: ["id", "url"],
+        },
+      ],
     });
 
     return this;
