@@ -12,7 +12,7 @@ const transport = pino.transport({
 const logger = pino(
   {
     base: undefined,
-    level: process.env.LOG_LEVEL,
+    level: process.env.NODE_ENV === "production" ? "warn" : "debug",
     redact: {
       paths: ["email", "password"],
       censor: "[RESTRICTED]",
