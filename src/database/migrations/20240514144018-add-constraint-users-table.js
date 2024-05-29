@@ -8,7 +8,7 @@ module.exports = {
     });
 
     await queryInterface.addConstraint("users", {
-      fields: ["selected_avatar"],
+      fields: ["selected_avatar_id"],
       type: "foreign key",
       references: {
         table: "avatars",
@@ -16,7 +16,7 @@ module.exports = {
       },
       onUpdate: "CASCADE",
       onDelete: "RESTRICT",
-      name: "fk_users_selected_avatar",
+      name: "fk_users_selected_avatar_id",
     });
   },
 

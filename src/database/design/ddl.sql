@@ -3,7 +3,7 @@ CREATE DATABASE conexao095;
 CREATE TABLE IF NOT EXISTS users (
 	id BIGINT UNSIGNED NOT NULL,
     is_admin BOOLEAN NOT NULL DEFAULT 0,
-    selected_avatar INT UNSIGNED NOT NULL DEFAULT 1,
+    selected_avatar_id INT UNSIGNED NOT NULL DEFAULT 1,
     nickname VARCHAR(20) NOT NULL,
     password TEXT NOT NULL,
     xp INT UNSIGNED NOT NULL DEFAULT 0,
@@ -49,7 +49,7 @@ ALTER TABLE users
 MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT pk_users_id PRIMARY KEY (id),
 ADD CONSTRAINT uk_users_nickname UNIQUE KEY (nickname),
-ADD CONSTRAINT fk_users_selected_avatar FOREIGN KEY (selected_avatar) REFERENCES avatars(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+ADD CONSTRAINT fk_users_selected_avatar_id FOREIGN KEY (selected_avatar_id) REFERENCES avatars(id) ON UPDATE CASCADE ON DELETE RESTRICT,
 ADD INDEX idx_users_nickname (nickname);
 
 ALTER TABLE photos

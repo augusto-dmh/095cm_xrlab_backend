@@ -3,7 +3,7 @@
 entity User {
     id BIGINT <<PK>>
     isAdmin BOOLEAN
-    selectedAvatar INT <<FK>>
+    selectedAvatarId INT <<FK>>
     nickname VARCHAR(20) <<UK>>
     password TEXT
     xp INT

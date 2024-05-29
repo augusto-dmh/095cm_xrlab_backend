@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
-      selected_avatar: {
+      selected_avatar_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         defaultValue: 1,

@@ -8,19 +8,13 @@ import Avatar from "../models/Avatar";
 import queryString from "query-string";
 
 const store = async (req, res, next) => {
-  const {
-    nickname,
-    isAdmin,
-    selectedAvatar: selected_avatar,
-    password,
-    xp,
-  } = req.body;
+  const { nickname, isAdmin, selectedAvatarId, password, xp } = req.body;
 
   try {
     const user = await User.create({
       nickname,
       isAdmin,
-      selected_avatar,
+      selectedAvatarId,
       password,
       xp,
     });
@@ -83,7 +77,7 @@ const show = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const { userId: id } = req;
-  const { nickname, isAdmin, selectedAvatar, password, xp } = req.body;
+  const { nickname, isAdmin, selectedAvatarId, password, xp } = req.body;
 
   try {
     const user = await User.findByPk(id);
@@ -93,7 +87,7 @@ const update = async (req, res, next) => {
     const updatedUser = await user.update(
       nickname,
       isAdmin,
-      selectedAvatar,
+      selectedAvatarId,
       password,
       xp
     );

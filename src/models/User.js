@@ -17,7 +17,7 @@ export default class User extends Model {
             msg: errors.models.nickname.inUse,
           },
         },
-        selected_avatar: {
+        selectedAvatarId: {
           type: DataTypes.INTEGER,
           defaultValue: 1,
           validate: {
@@ -57,7 +57,7 @@ export default class User extends Model {
     });
 
     this.addScope("defaultScope", {
-      attributes: { exclude: ["selected_avatar"] },
+      attributes: { exclude: ["selectedAvatarId"] },
       include: [
         { model: Avatar, as: "selectedAvatar", attributes: ["id", "url"] },
       ],
@@ -86,7 +86,7 @@ export default class User extends Model {
     this.hasMany(models.photo, { foreignKey: "userId" });
     this.belongsTo(models.avatar, {
       as: "selectedAvatar",
-      foreignKey: "selected_avatar",
+      foreignKey: "selectedAvatarId",
     });
     this.belongsToMany(models.avatar, {
       as: "avatars",

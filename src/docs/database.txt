@@ -8,7 +8,7 @@ inclusive Photos associadas a ele, bastaria uma consulta segundo seu ID).
 - isAdmin: dado de tipo boolean. Identifica um user como admin ou não. É utilizado para determinar se recursos de um
 administrador aparecerão disponíveis para serem utilizados na aplicação (ex: uma aba para aceitação ou recusa de Photos
 enviadas por Users).
-- selected_avatar: chave estrangeira que referencia a chave primária de Avatars 'id'. É utilizada para obtenção de qual avatar
+- selected_avatar_id: chave estrangeira que referencia a chave primária de Avatars 'id'. É utilizada para obtenção de qual avatar
 que um user possui está selecionado, permitindo sua exibição no perfil com base em uma url (a qual será montada
 por parte da api utilizando 'filename' de Avatars) para ser o valor do atributo 'src' de uma tag <img> no front-end.
 - nickname: chave única que identifica o nome-fantasia do user. É utilizado na criação de conta
@@ -20,7 +20,7 @@ mostrado em forma de emblema).
 
 Avatars
 - id: chave primária de tipo int. É utilizada para obter, junto aos dados próprios de User, os avatars que user possui
-(user_avatars) e aquele que está selecionado ('selected_avatar').
+(user_avatars) e aquele que está selecionado ('selected_avatar_id').
 - name: chave única de tipo varchar(30). Contém o nome do avatar que será mostrado no front-end para o usuário final
 ('id' serve para queries "debaixo dos panos", mas não cairia bem mostrar ao usuário final que ele pode obter o avatar 2621).
 - filename: chave única de tipo text. Será usado para montagem de uma url no back-end que será utilizada para mostrar o avatar
@@ -48,6 +48,6 @@ Entre um user e uma photo a relação é one-to-many(0:N)/one-to-one(1:1):
 Entre um user e um avatar existem duas relações distintas: one-to-one(1:1) e one-to-many(1:N)/(0:N):
 - User (1) — (1) Avatar (The user's selected avatar)
 - User (0..N) — (1..N) Avatar (The user's avatars)
-- um User deve estar com um e somente um avatar selecionado (FK selected_avatar em User);
+- um User deve estar com um e somente um avatar selecionado (FK selected_avatar_id em User);
 - um User deve ter um ou mais Avatars (tabela associativa User_avatars);
 - um avatar pode pertencer a um ou mais Users (tabela associativa User_avatars).
