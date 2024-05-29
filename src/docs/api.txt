@@ -1,29 +1,55 @@
 HOW TO SET THE API:
 
-1 - Clone the repository located at https://github.com/augusto-dmh/conexao095_xrlab_backend
+/**
+ * Step 1: Clone the repository located at https://github.com/augusto-dmh/conexao095_xrlab_backend.
+ */
 
-2 - Create the MYSQL database (execute each of the commands from top to bottom).
+/**
+ * Step 2: Create a MYSQL database for development.
+ *
+ * Execute 'create_db_dev' bash script located in the src/database/scripts directory.
+ * The script will handle the creation of the MYSQL database required for development purposes - already with mock data.
+ */
 
-2 - Run “npm install” to install the project dependencies.
+/**
+ * Step 2: Run "npm install" to install the project dependencies.
+ */
 
-3 - Create a .env file at the root of the application containing the following items:
+/**
+ * 3 - Change the name of '.env.example' to '.env' at the root of the application.
+ * Change the values of the variables in the file according to the following description of each key:
+ *
+ * - NODE_ENV The environment in which the application is running (development or production).
 
-NODE_ENV=development LOG_LEVEL=info
-DATABASE=your_database_name (e.g., conexao095)
-DATABASE_HOST=ip_where_your_db_is_hosted (e.g., 127.0.0.1)
-DATABASE_PORT=port_where_your_db_is_hosted (e.g., 3306)
-DATABASE_USERNAME=your_db_user (e.g., root)
-DATABASE_PASSWORD=db_password (e.g., kaksjdajskdsakldj)
-TOKEN_SECRET=random_and_strong_character_sequence (e.g., &ds7a89duj9jdsads8790ad&AD)(AD) TOKEN_EXPIRATION=how_long_the_authentication_token_takes_to_expire (e.g., 7d, 1y, 1h…)
-APP_URL=url_where_the_application_is_accessible_on_the_web (e.g., http://localhost:3000)
-APP_PORT=port_where_the_application_listens_for_requests (e.g., 3000)
+ * - DATABASE: The name of the database to connect to. (e.g., conexao095_dev - the db created with 'create_db_dev' uses this name)
+ * - DATABASE_HOST: The IP address or hostname where the database is hosted. (e.g., 127.0.0.1)
+ * - DATABASE_PORT: The port number on which the database is listening. (e.g., 3306)
+ * - DATABASE_USERNAME: The username to be used for database authentication. (e.g., root)
+ * - DATABASE_PASSWORD: The password to be used for database authentication. (e.g., kaksjdajskdsakldj)
 
-4 - In api/src/app.js, in the following instruction:
+ * - TOKEN_SECRET: A random and strong character sequence used for token generation and verification. (e.g., &ds7a89duj9jdsads8790ad&AD
+ * - TOKEN_EXPIRATION: The duration for which the authentication token remains valid (e.g., 7d, 1y, 1h).
 
-const whitelist = [];
-Add within the array a string containing the URL where the frontend is hosted (e.g., https://localhost:5173)
+ * - APP_URL: The URL where the application is accessible on the web. (e.g., http://localhost:3000)
+ * - APP_PORT: The port number on which the application listens for incoming requests. (e.g., 3000)
+ */
 
-5 - Run ‘npm run dev’ at the root of the project.
+/**
+  Step 4: Add the frontend URL to the whitelist array in the app.js file.
+
+ * In the file api/src/app.js, add the URL of the frontend where the application is hosted to the whitelist array.
+ * This allows requests from the specified frontend URL to access the backend API.
+ */
+
+/**
+ * Step 5: Run 'npm run dev' at the root of the project.
+ *
+ * This command is used to start the development server for the project.
+ * It runs the 'dev' script defined in the package.json file, which
+ * starts a local server and watches for changes in the code.
+ */
+
+================================================================================================================================================================
 
 
 
@@ -31,56 +57,192 @@ ENDPOINTS:
 
 * HTTP METHOD [path]
 - motivo de existir
-- dados que devem ou podem estar no body (se for necessário um body)
-- exige ou não login
+?- exige ou não autenticação ('Authorization' header com token jwt válido em formato 'Bearer [token]')
+?- dados que devem (ex: nickname) ou podem (ex: ?isAdmin) estar no body (se for necessário um body) e se é multipart/form-data
+?- query params que podem ser usados (ex: filter[]=photos,avatars. obs: nesse caso tanto photos quanto avatars são opcionais)
+- exemplo de retorno
 
 
 -- photos
 
 * GET /photos
 - carregar todas as fotos da aplicação
-- sem body.
-- não exige
+- [
+	{
+		"url": "http://localhost:3000/images/1cb9b124-c76e-4095-a444-cd1bba2539a9.png",
+		"id": 1,
+		"filename": "1cb9b124-c76e-4095-a444-cd1bba2539a9.png",
+		"latitude": 1,
+		"longitude": 51.3,
+		"userId": 14
+	},
+	{
+		"url": "http://localhost:3000/images/dca39b3b-190a-4c3d-aed7-46e5e21e4b31.png",
+		"id": 2,
+		"filename": "dca39b3b-190a-4c3d-aed7-46e5e21e4b31.png",
+		"latitude": 1,
+		"longitude": 51.3,
+		"userId": 14
+	}, ...
+]
 
 * POST /photos
 - upload de photos
-- latitude (number), longitude (number), photo (file (.png or jpg))
-- exige
+- autenticação necessária
+- latitude (number between -90 and 90), longitude (number between -180 and 180), photo (.png or .jpg, max size 5MB). multipart/form-data
+- {
+	"id": 51,
+	"nickname": "augusto",
+	"isAdmin": false,
+	"selectedAvatarId": "1",
+	"password": "$2a$10$ytNx79zq05c7G35rX6l/n.otw9gxE5VloWfApyWF.bnahKf9ksT.G",
+	"xp": "100",
+	"updatedAt": "2024-05-18T02:54:05.239Z",
+	"createdAt": "2024-05-18T02:54:05.239Z"
+}
 
 
 -- users
 
 * GET /users
-- carregar todos os usuários da aplicação (incluindo dados relacionados (não registros de uma tabela, mas resultados de joins e subqueries), como o avatar selecionado e os avatares disponíveis para cada um deles)
-- sem body
-- não exige
+- carregar todos os usuários da aplicação
+- pode receber como query params 'filter[]=photos,avatars' para incluir as fotos e avatares dos usuários
+- [
+	{
+		"id": 9,
+		"nickname": "Marcos.Bradtke10",
+		"isAdmin": true,
+		"xp": 233,
+		"createdAt": "2024-05-18T02:53:43.000Z",
+		"updatedAt": "2024-05-18T02:53:43.000Z",
+		"selectedAvatar": {
+			"url": "http://localhost:3000/images/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+			"id": 3
+		},
+		"photos": [
+			{
+				"url": "http://localhost:3000/photos/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 25
+			}
+		],
+		"avatars": [
+			{
+				"url": "http://localhost:3000/images/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 1
+			},
+      {
+				"url": "http://localhost:3000/images/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 3
+			},
+		]
+	},
+	{
+		"id": 10,
+		"nickname": "Bart.Hahn",
+		"isAdmin": false,
+		"xp": 713,
+		"createdAt": "2024-05-18T02:53:43.000Z",
+		"updatedAt": "2024-05-18T02:53:43.000Z",
+		"selectedAvatar": {
+			"url": "http://localhost:3000/images/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+			"id": 1
+		},
+		"photos": [
+			{
+				"url": "http://localhost:3000/photos/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 99
+			},
+			{
+				"url": "http://localhost:3000/photos/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 100
+			}
+		],
+		"avatars": [
+      {
+				"url": "http://localhost:3000/images/475deead-8d3d-4dbe-9345-03226ae6ed21.png",
+				"id": 1
+			},
+    ]
+	}, ...
+]
 
 * GET /users/user
-- carregar os dados de um usuário (incluindo dados relacionados ``)
-- sem body
-- exige
+- carregar os dados do usuário autenticado, incluindo o seu avatar selecionado
+- autenticação necessária
+- {
+	"id": 51,
+	"nickname": "augusto",
+	"isAdmin": false,
+	"password": "$2a$10$ytNx79zq05c7G35rX6l/n.otw9gxE5VloWfApyWF.bnahKf9ksT.G",
+	"xp": 100,
+	"createdAt": "2024-05-18T02:54:05.000Z",
+	"updatedAt": "2024-05-18T02:54:05.000Z",
+	"selectedAvatar": {
+		"url": "http://localhost:3000/images/undefined",
+		"id": 1
+	}
+}
 
 * POST /users
 - criar um novo usuário.
-- deve conter id (integer), nickname (string), selected_avatar (integer), isAdmin (boolean), password (string)
-- exige
+- autenticação necessária
+- nickname (UK string), ?selectedAvatarId (FK from avatars id), ?isAdmin (boolean), ?xp (integer), password (string)
+- {
+	"id": 51,
+	"nickname": "augusto3",
+	"isAdmin": false,
+	"selectedAvatarId": 1,
+	"password": "$2a$10$1z8kXeqHCKkNMGm8sOL2heLth1BudRpha3.B8E51qr0pPw5Ya3fCa",
+	"xp": "100",
+	"updatedAt": "2024-05-29T00:03:59.208Z",
+	"createdAt": "2024-05-29T00:03:59.208Z"
+}
 
 * PUT /users
-- atualizar dados de um usuário
-- pode conter id (integer), nickname (string), selected_avatar (integer), isAdmin (boolean), password (string)
-- exige
+- atualizar dados do usuário autenticado
+- autenticação necessária
+- nickname (UK string), ?selectedAvatarId (FK from avatars id), ?isAdmin (boolean), ?xp (integer) password (string)
+- {
+	"id": 51,
+	"nickname": "augusto3",
+	"isAdmin": false,
+	"password": "$2a$10$4HqJ0NRDs36/7uE99PmOeu/kNN9DwOnjNBs5qoHbd965ArUivVAqm",
+	"xp": 100,
+	"createdAt": "2024-05-29T00:03:59.000Z",
+	"updatedAt": "2024-05-29T00:03:59.000Z",
+	"selectedAvatar": {
+		"url": "http://localhost:3000/images/undefined",
+		"id": 1
+	}
+}
 
 * DELETE /users
 - deletar um usuário
-- sem body
-- exige
+- autenticação necessária
+- {
+	"id": 51,
+	"nickname": "augusto3",
+	"isAdmin": false,
+	"password": "$2a$10$1z8kXeqHCKkNMGm8sOL2heLth1BudRpha3.B8E51qr0pPw5Ya3fCa",
+	"xp": 100,
+	"createdAt": "2024-05-29T00:03:59.000Z",
+	"updatedAt": "2024-05-29T00:03:59.000Z",
+	"selectedAvatar": {
+		"url": "http://localhost:3000/images/undefined",
+		"id": 1
+	}
+}
 
 -- tokens
 
 * POST /tokens
 - criar um jwt token.
-- deve conter nickname (string) e password (string) referente a um usuário da aplicação.
-- não exige
+- nickname (string), password (string) - referentes a um usuário já armazenado.
+- {
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTEsImlhdCI6MTcxNjA2OTQzNywiZXhwIjoxNzE2Njc0MjM3fQ.OrajG2_hn0iLNfYi6aKNp6D9DJX_qcLBRcnD47HEj40"
+}
+
+================================================================================================================================================================
 
 
 
@@ -149,6 +311,9 @@ query parameters in the browser and Node.js.
 - It's a TypeScript-first schema declaration and validation library.
 It is designed to be lightweight and very fast.
 
+================================================================================================================================================================
+
+
 
 -- Development dependencies:
 
@@ -180,6 +345,8 @@ a solid foundation for JavaScript projects, ensuring consistency and readability
 
 * sucrase
 - It's a super-fast Babel alternative that makes development with modern JavaScript syntax more efficient. It allows developers to use features like import/export syntax without the need for transpilation in development environments.
+
+================================================================================================================================================================
 
 
 
