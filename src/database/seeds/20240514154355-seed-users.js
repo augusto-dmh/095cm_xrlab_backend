@@ -8,6 +8,7 @@ module.exports = {
     const usersData = Array.from({ length: 50 }).map((_, index) => ({
       id: index + 1,
       is_admin: faker.datatype.boolean(),
+      birthdate: faker.date.past(),
       selected_avatar_id: faker.number.int({ min: 1, max: 10 }),
       nickname: faker.internet.userName(),
       password: hashSync(faker.internet.password(), 10),

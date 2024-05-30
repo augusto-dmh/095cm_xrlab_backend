@@ -10,6 +10,7 @@ import User from "../models/User";
 const router = new Router();
 
 const fieldsValidation = [
+  // FOR UPDATE, MAKE AN EQUAL VALIDATION MIDDLEWARES ARRAY BUT WITH ALL FIELDS AS OPTIONAL
   [
     body("nickname")
       .notEmpty()
@@ -17,6 +18,15 @@ const fieldsValidation = [
       .bail()
       .isLength({ min: 0, max: 20 })
       .withMessage(errors.nickname.invalidLength)
+      .escape(),
+  ],
+  [
+    body("birthdate")
+      .notEmpty()
+      .withMessage(errors.birthdate.empty)
+      .bail()
+      .isDate()
+      .withMessage(errors.birthdate.nonDate)
       .escape(),
   ],
   [

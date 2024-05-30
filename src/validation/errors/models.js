@@ -10,6 +10,11 @@ export const nickname = {
   inUse: "'nickname' already in use. Please try another.",
 };
 
+export const birthdate = {
+  nonDate: "Invalid birthdate.",
+  empty: "'birthdate' is required.",
+};
+
 export const isAdmin = {
   nonBoolean: "'isAdmin' must be a boolean value.",
 };

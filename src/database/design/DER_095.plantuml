@@ -5,6 +5,7 @@ entity User {
     isAdmin BOOLEAN
     selectedAvatarId INT <<FK>>
     nickname VARCHAR(20) <<UK>>
+    birthdate DATEONLY
     password TEXT
     xp INT
     --

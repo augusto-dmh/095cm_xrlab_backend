@@ -8,6 +8,8 @@ inclusive Photos associadas a ele, bastaria uma consulta segundo seu ID).
 - isAdmin: dado de tipo boolean. Identifica um user como admin ou não. É utilizado para determinar se recursos de um
 administrador aparecerão disponíveis para serem utilizados na aplicação (ex: uma aba para aceitação ou recusa de Photos
 enviadas por Users).
+- birthdate: dado de tipo date. É utilizado para determinar a idade do user, a qual é utilizada em análises estatísticas
+a respeito dos usuário da aplicação (ex: qual a idade média dos usuários ativos da aplicação).
 - selected_avatar_id: chave estrangeira que referencia a chave primária de Avatars 'id'. É utilizada para obtenção de qual avatar
 que um user possui está selecionado, permitindo sua exibição no perfil com base em uma url (a qual será montada
 por parte da api utilizando 'filename' de Avatars) para ser o valor do atributo 'src' de uma tag <img> no front-end.

@@ -3,6 +3,7 @@ CREATE DATABASE conexao095;
 CREATE TABLE IF NOT EXISTS users (
 	id BIGINT UNSIGNED NOT NULL,
     is_admin BOOLEAN NOT NULL DEFAULT 0,
+    birthdate DATE NOT NULL,
     selected_avatar_id INT UNSIGNED NOT NULL DEFAULT 1,
     nickname VARCHAR(20) NOT NULL,
     password TEXT NOT NULL,

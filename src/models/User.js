@@ -17,6 +17,14 @@ export default class User extends Model {
             msg: errors.models.nickname.inUse,
           },
         },
+        birthdate: {
+          type: DataTypes.DATEONLY,
+          validate: {
+            isDate: {
+              msg: errors.models.birthdate.nonDate,
+            },
+          },
+        },
         selectedAvatarId: {
           type: DataTypes.INTEGER,
           defaultValue: 1,

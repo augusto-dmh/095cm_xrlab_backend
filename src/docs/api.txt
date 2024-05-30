@@ -107,10 +107,11 @@ ENDPOINTS:
 * GET /users
 - carregar todos os usuários da aplicação
 - pode receber como query params 'filter[]=photos,avatars' para incluir as fotos e avatares dos usuários
-- [
+- [ // result example with 'filter[]=photos,avatars' in the query string
 	{
 		"id": 9,
 		"nickname": "Marcos.Bradtke10",
+    "birthdate": "2023-06-19",
 		"isAdmin": true,
 		"xp": 233,
 		"createdAt": "2024-05-18T02:53:43.000Z",
@@ -139,6 +140,7 @@ ENDPOINTS:
 	{
 		"id": 10,
 		"nickname": "Bart.Hahn",
+    "birthdate": "2007-06-19",
 		"isAdmin": false,
 		"xp": 713,
 		"createdAt": "2024-05-18T02:53:43.000Z",
@@ -172,6 +174,7 @@ ENDPOINTS:
 - {
 	"id": 51,
 	"nickname": "augusto",
+  "birthdate": "2007-06-19",
 	"isAdmin": false,
 	"password": "$2a$10$ytNx79zq05c7G35rX6l/n.otw9gxE5VloWfApyWF.bnahKf9ksT.G",
 	"xp": 100,
@@ -190,6 +193,7 @@ ENDPOINTS:
 - {
 	"id": 51,
 	"nickname": "augusto3",
+	"birthdate": "2024-05-30",
 	"isAdmin": false,
 	"selectedAvatarId": 1,
 	"password": "$2a$10$1z8kXeqHCKkNMGm8sOL2heLth1BudRpha3.B8E51qr0pPw5Ya3fCa",
@@ -205,6 +209,7 @@ ENDPOINTS:
 - {
 	"id": 51,
 	"nickname": "augusto3",
+  "birthdate": "2007-06-19",
 	"isAdmin": false,
 	"password": "$2a$10$4HqJ0NRDs36/7uE99PmOeu/kNN9DwOnjNBs5qoHbd965ArUivVAqm",
 	"xp": 100,
@@ -222,6 +227,7 @@ ENDPOINTS:
 - {
 	"id": 51,
 	"nickname": "augusto3",
+  "birthdate": "2007-06-19",
 	"isAdmin": false,
 	"password": "$2a$10$1z8kXeqHCKkNMGm8sOL2heLth1BudRpha3.B8E51qr0pPw5Ya3fCa",
 	"xp": 100,

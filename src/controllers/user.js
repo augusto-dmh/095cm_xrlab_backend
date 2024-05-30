@@ -6,6 +6,7 @@ import ErrorContext from "../validation/errors/classes/ErrorContext";
 import Photo from "../models/Photo";
 import Avatar from "../models/Avatar";
 import queryString from "query-string";
+import { birthdate } from "../validation/errors/models";
 
 const store = async (req, res, next) => {
   const { nickname, isAdmin, selectedAvatarId, password, xp } = req.body;
@@ -13,6 +14,7 @@ const store = async (req, res, next) => {
   try {
     const user = await User.create({
       nickname,
+      birthdate,
       isAdmin,
       selectedAvatarId,
       password,
@@ -77,7 +79,8 @@ const show = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const { userId: id } = req;
-  const { nickname, isAdmin, selectedAvatarId, password, xp } = req.body;
+  const { nickname, birthdate, isAdmin, selectedAvatarId, password, xp } =
+    req.body;
 
   try {
     const user = await User.findByPk(id);
@@ -86,6 +89,7 @@ const update = async (req, res, next) => {
 
     const updatedUser = await user.update(
       nickname,
+      birthdate,
       isAdmin,
       selectedAvatarId,
       password,

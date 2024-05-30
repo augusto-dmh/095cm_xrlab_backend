@@ -23,6 +23,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      birthdate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+      },
       password: {
         type: Sequelize.TEXT,
         allowNull: false,
