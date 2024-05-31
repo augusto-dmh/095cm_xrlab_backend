@@ -8,6 +8,7 @@ entity User {
     birthdate DATEONLY
     password TEXT
     xp INT
+    last_activity TIMESTAMP
     --
 }
 

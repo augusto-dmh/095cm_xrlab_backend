@@ -19,6 +19,8 @@ e login próprio da aplicação.
 - xp: dado de tipo int. Trata-se da quantidade de pontos de experiência que o user possui. É utilizado para ser
 consumido pelo frontend e usado como base para a mostragem de nível do user (ex: 100 de xp corresponde ao nível 5,
 mostrado em forma de emblema).
+- last_activity: dado de tipo timestamp. É utilizado para determinar a última vez que o user realizou alguma ação na aplicação, dentre as quais cabe-se citar:
+envio de foto, alteração de avatar selecionado etc. Utilizado para análise de estatísticas de uso da aplicação.
 
 Avatars
 - id: chave primária de tipo int. É utilizada para obter, junto aos dados próprios de User, os avatars que user possui

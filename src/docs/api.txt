@@ -97,6 +97,7 @@ ENDPOINTS:
 	"selectedAvatarId": "1",
 	"password": "$2a$10$ytNx79zq05c7G35rX6l/n.otw9gxE5VloWfApyWF.bnahKf9ksT.G",
 	"xp": "100",
+  "lastActivity": "2024-05-18T02:53:43.000Z",
 	"updatedAt": "2024-05-18T02:54:05.239Z",
 	"createdAt": "2024-05-18T02:54:05.239Z"
 }
@@ -114,6 +115,7 @@ ENDPOINTS:
     "birthdate": "2023-06-19",
 		"isAdmin": true,
 		"xp": 233,
+    "lastActivity": "2024-05-18T02:53:43.000Z",
 		"createdAt": "2024-05-18T02:53:43.000Z",
 		"updatedAt": "2024-05-18T02:53:43.000Z",
 		"selectedAvatar": {
@@ -143,6 +145,7 @@ ENDPOINTS:
     "birthdate": "2007-06-19",
 		"isAdmin": false,
 		"xp": 713,
+    "lastActivity": "2024-05-18T02:53:43.000Z",
 		"createdAt": "2024-05-18T02:53:43.000Z",
 		"updatedAt": "2024-05-18T02:53:43.000Z",
 		"selectedAvatar": {
@@ -178,6 +181,7 @@ ENDPOINTS:
 	"isAdmin": false,
 	"password": "$2a$10$ytNx79zq05c7G35rX6l/n.otw9gxE5VloWfApyWF.bnahKf9ksT.G",
 	"xp": 100,
+  "lastActivity": "2024-05-18T02:53:43.000Z",
 	"createdAt": "2024-05-18T02:54:05.000Z",
 	"updatedAt": "2024-05-18T02:54:05.000Z",
 	"selectedAvatar": {
@@ -191,6 +195,7 @@ ENDPOINTS:
 - autenticação necessária
 - nickname (UK string), ?selectedAvatarId (FK from avatars id), ?isAdmin (boolean), ?xp (integer), password (string)
 - {
+  "lastActivity": "2024-05-18T02:53:43.000Z",
 	"id": 51,
 	"nickname": "augusto3",
 	"birthdate": "2024-05-30",
@@ -231,6 +236,7 @@ ENDPOINTS:
 	"isAdmin": false,
 	"password": "$2a$10$1z8kXeqHCKkNMGm8sOL2heLth1BudRpha3.B8E51qr0pPw5Ya3fCa",
 	"xp": 100,
+  "lastActivity": "2024-05-18T02:53:43.000Z",
 	"createdAt": "2024-05-29T00:03:59.000Z",
 	"updatedAt": "2024-05-29T00:03:59.000Z",
 	"selectedAvatar": {

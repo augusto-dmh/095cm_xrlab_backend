@@ -24,6 +24,7 @@ module.exports = {
             nickname: nickname,
             password: hashSync(faker.internet.password(), 10),
             xp: faker.number.int({ min: 0, max: 1000 }),
+            last_activity: faker.date.recent(),
             created_at: new Date(),
             updated_at: new Date(),
           };

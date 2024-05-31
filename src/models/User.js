@@ -53,6 +53,10 @@ export default class User extends Model {
           type: DataTypes.INTEGER,
           defaultValue: 0,
         },
+        lastActivity: {
+          type: DataTypes.DATE,
+          defaultValue: new Date(),
+        },
       },
       {
         sequelize,
