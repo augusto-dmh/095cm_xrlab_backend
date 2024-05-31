@@ -57,36 +57,17 @@ const index = async (req, res, next) => {
 };
 
 const show = async (req, res, next) => {
-  const fullPath = req.baseUrl + req.path;
-  const { userId: id } = req;
+  const { user } = req;
 
-  try {
-    const user = await User.findByPk(id);
-
-    if (!user)
-      throw new ApiError(
-        ...errors.controllers.createUserNotFound(id, fullPath)
-      );
-
-    res.json({ ...user.dataValues });
-  } catch (err) {
-    const trace = stacktrace.parse(err);
-    const errorContext = new ErrorContext(err, trace);
-
-    next(errorContext);
-  }
+  res.json({ ...user.dataValues });
 };
 
 const update = async (req, res, next) => {
-  const { userId: id } = req;
+  const { user } = req;
   const { nickname, birthdate, isAdmin, selectedAvatarId, password, xp } =
     req.body;
 
   try {
-    const user = await User.findByPk(id);
-
-    if (!user) throw new ApiError(...errors.controllers.createUserNotFound(id));
-
     const updatedUser = await user.update(
       nickname,
       birthdate,
@@ -106,13 +87,9 @@ const update = async (req, res, next) => {
 };
 
 const destroy = async (req, res, next) => {
-  const { userId: id } = req;
+  const { user } = req;
 
   try {
-    const user = await User.findByPk(id);
-
-    if (!user) throw new ApiError(...errors.controllers.createUserNotFound(id));
-
     await user.destroy();
 
     res.json(user);

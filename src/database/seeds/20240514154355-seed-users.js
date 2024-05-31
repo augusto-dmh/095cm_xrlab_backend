@@ -9,10 +9,7 @@ module.exports = {
 
     const usersData = Array.from({ length: 50 }).map((_, index) => {
       while (true) {
-        const nickname = faker.internet.userName({ min: 3, max: 19 });
-        /** this function generates a username based on a random first name and a random last name separated by a period or an underscore,
-         * so if the first and last name together have together 20 characters, with the separator it will be 21 characters; that's why the max length is 19.
-         * */
+        const nickname = faker.lorem.word({ min: 3, max: 20 });
         if (!usedNicknames.has(nickname)) {
           usedNicknames.add(nickname);
 

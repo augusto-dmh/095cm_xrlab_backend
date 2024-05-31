@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 /* eslint-disable no-unused-vars */ // error-handling middleware demands "next" to work.
 export default ({ err, trace }, req, res, next) => {
+  console.log(err);
   const validationRes = validationResult(req);
 
   if (!validationRes.isEmpty()) {

@@ -10,7 +10,7 @@ import path from "path";
 const store = async (req, res, next) => {
   const fullPath = req.baseUrl + req.path;
   const { latitude, longitude } = req.body;
-  const { userId } = req;
+  const { user } = req;
   const { filename } = req.file;
 
   try {
@@ -18,7 +18,7 @@ const store = async (req, res, next) => {
       throw new ApiError(...errors.controllers.createMissingFile(fullPath));
     }
 
-    const photo = await Photo.create({ userId, filename, latitude, longitude });
+    const photo = await user.createPhoto({ filename, latitude, longitude });
 
     const trace = stacktrace.get();
     const log = new Log(201, "Photo created", trace);

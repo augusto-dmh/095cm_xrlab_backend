@@ -54,3 +54,5 @@ npx sequelize-cli db:migrate
 
 echo "Inserting mock data..."
 npx sequelize-cli db:seed:all
+
+sleep 3

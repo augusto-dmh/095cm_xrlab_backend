@@ -31,7 +31,7 @@ export default async (req, res, next) => {
     if (!user)
       throw new ApiError(...errors.createInvalidTokenDecodedPayload(fullPath));
 
-    req.userId = id;
+    req.user = user;
 
     return next();
   } catch (err) {
