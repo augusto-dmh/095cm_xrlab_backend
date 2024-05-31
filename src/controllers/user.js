@@ -6,10 +6,10 @@ import ErrorContext from "../validation/errors/classes/ErrorContext";
 import Photo from "../models/Photo";
 import Avatar from "../models/Avatar";
 import queryString from "query-string";
-import { birthdate } from "../validation/errors/models";
 
 const store = async (req, res, next) => {
-  const { nickname, isAdmin, selectedAvatarId, password, xp } = req.body;
+  const { nickname, birthdate, isAdmin, selectedAvatarId, password, xp } =
+    req.body;
 
   try {
     const user = await User.create({
