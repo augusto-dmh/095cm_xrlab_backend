@@ -16,7 +16,7 @@ module.exports = {
           return {
             id: index + 1,
             is_admin: faker.datatype.boolean(),
-            birthdate: faker.date.past(),
+            birthdate: faker.date.past({ years: 18 }),
             selected_avatar_id: faker.number.int({ min: 1, max: 10 }),
             nickname: nickname,
             password: hashSync(faker.internet.password(), 10),
