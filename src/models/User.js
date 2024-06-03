@@ -90,6 +90,34 @@ export default class User extends Model {
         },
       ],
     });
+    this.addScope("age", {
+      attributes: {
+        include: [
+          [sequelize.literal(`FLOOR(DATEDIFF(NOW(), birthdate) / 365)`), "age"],
+        ],
+      },
+    });
+    this.addScope("photoCount", {
+      include: [
+        {
+          model: Photo,
+          attributes: [],
+        },
+      ],
+      attributes: {
+        include: [
+          [sequelize.fn("COUNT", sequelize.col("photos.id")), "photoCount"],
+        ],
+      },
+      group: ["id"],
+    });
+    this.addScope("orderByMostActiveUsers", {
+      order: [
+        ["lastActivity", "DESC"],
+        ["xp", "DESC"],
+        ["photoCount", "DESC"],
+      ],
+    });
 
     return this;
   }
