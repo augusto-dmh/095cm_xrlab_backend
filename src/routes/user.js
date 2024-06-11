@@ -10,7 +10,6 @@ import User from "../models/User";
 const router = new Router();
 
 const fieldsValidation = [
-  // FOR UPDATE, MAKE AN EQUAL VALIDATION MIDDLEWARES ARRAY BUT WITH ALL FIELDS AS OPTIONAL
   [
     body("nickname")
       .exists()
@@ -62,10 +61,70 @@ const fieldsValidation = [
   ],
 ];
 
+const fieldsValidationUpdate = [
+  [
+    body("nickname")
+      .optional()
+      .exists()
+      .withMessage(errors.nickname.empty)
+      .bail()
+      .isLength({ min: 0, max: 20 })
+      .withMessage(errors.nickname.invalidLength)
+      .escape(),
+  ],
+  [
+    body("birthdate")
+      .optional()
+      .exists()
+      .withMessage(errors.birthdate.empty)
+      .bail()
+      .isISO8601("yyyy-mm-dd")
+      .withMessage(errors.birthdate.nonDate)
+      .escape(),
+  ],
+  [
+    body("isAdmin")
+      .optional()
+      .isBoolean()
+      .withMessage(errors.isAdmin.nonBoolean)
+      .bail(),
+  ],
+  [
+    body("selectedAvatar")
+      .optional()
+      .exists()
+      .withMessage(errors.selectedAvatar.empty)
+      .bail(),
+  ],
+  [
+    body("password")
+      .optional()
+      .exists()
+      .withMessage(errors.password.empty)
+      .bail()
+      .isLength({ min: 6, max: 50 })
+      .withMessage(errors.password.invalidLength),
+  ],
+  [
+    body("xp")
+      .optional()
+      .exists()
+      .withMessage(errors.xp.empty)
+      .bail()
+      .isInt()
+      .withMessage(errors.xp.nonInteger),
+  ],
+];
+
 router.post("/users", fieldsValidation, userController.store);
 router.get("/users", userController.index);
 router.get("/users/user", loginRequired, userController.show);
-router.put("/users", fieldsValidation, loginRequired, userController.update);
+router.put(
+  "/users",
+  fieldsValidationUpdate,
+  loginRequired,
+  userController.update
+);
 router.delete("/users", loginRequired, userController.destroy);
 
 export default router;
