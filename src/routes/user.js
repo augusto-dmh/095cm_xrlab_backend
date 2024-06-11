@@ -13,7 +13,7 @@ const fieldsValidation = [
   // FOR UPDATE, MAKE AN EQUAL VALIDATION MIDDLEWARES ARRAY BUT WITH ALL FIELDS AS OPTIONAL
   [
     body("nickname")
-      .notEmpty()
+      .exists()
       .withMessage(errors.nickname.empty)
       .bail()
       .isLength({ min: 0, max: 20 })
@@ -22,10 +22,10 @@ const fieldsValidation = [
   ],
   [
     body("birthdate")
-      .notEmpty()
+      .exists()
       .withMessage(errors.birthdate.empty)
       .bail()
-      .isDate()
+      .isISO8601("yyyy-mm-dd")
       .withMessage(errors.birthdate.nonDate)
       .escape(),
   ],
@@ -34,35 +34,31 @@ const fieldsValidation = [
       .optional()
       .isBoolean()
       .withMessage(errors.isAdmin.nonBoolean)
-      .bail()
-      .escape(),
+      .bail(),
   ],
   [
     body("selectedAvatar")
       .optional()
-      .notEmpty()
+      .exists()
       .withMessage(errors.selectedAvatar.empty)
-      .bail()
-      .escape(),
+      .bail(),
   ],
   [
     body("password")
-      .notEmpty()
+      .exists()
       .withMessage(errors.password.empty)
       .bail()
       .isLength({ min: 6, max: 50 })
-      .withMessage(errors.password.invalidLength)
-      .escape(),
+      .withMessage(errors.password.invalidLength),
   ],
   [
     body("xp")
       .optional()
-      .notEmpty()
+      .exists()
       .withMessage(errors.xp.empty)
       .bail()
       .isInt()
-      .withMessage(errors.xp.nonInteger)
-      .escape(),
+      .withMessage(errors.xp.nonInteger),
   ],
 ];
 
