@@ -1,9 +1,6 @@
 import { Router } from "express";
 import userController from "../controllers/user";
 import loginRequired from "../middlewares/loginRequired";
-import { body } from "express-validator";
-import * as validations from "../validation";
-import * as errors from "../validation/errors/models";
 import Avatar from "../models/Avatar";
 import User from "../models/User";
 import userValidator from "../middlewares/validators/user";
