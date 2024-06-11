@@ -9,8 +9,8 @@ module.exports = {
         table: "users",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+      onUpdate: "cascade",
+      onDelete: "cascade",
       name: "fk_user_avatars_user_id",
     });
 
@@ -21,8 +21,8 @@ module.exports = {
         table: "avatars",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+      onUpdate: "cascade",
+      onDelete: "cascade",
       name: "fk_user_avatars_avatar_id",
     });
   },

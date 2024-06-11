@@ -14,8 +14,8 @@ module.exports = {
         table: "avatars",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "RESTRICT",
+      onUpdate: "cascade",
+      onDelete: "restrict",
       name: "fk_users_selected_avatar_id",
     });
   },
