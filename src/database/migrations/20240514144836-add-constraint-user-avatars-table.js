@@ -28,7 +28,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint("user_avatars", "cpk_user_avatars");
     await queryInterface.removeConstraint(
       "user_avatars",
       "fk_user_avatars_user_id"

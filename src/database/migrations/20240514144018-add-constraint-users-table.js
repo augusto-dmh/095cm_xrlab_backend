@@ -2,12 +2,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addConstraint("users", {
-      fields: ["nickname"],
-      type: "unique",
-      name: "uk_users_nickname",
-    });
-
-    await queryInterface.addConstraint("users", {
       fields: ["selected_avatar_id"],
       type: "foreign key",
       references: {
@@ -21,7 +15,9 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint("users", "uk_users_nickname");
-    await queryInterface.removeConstraint("users", "fk_users_selected_avatar");
+    await queryInterface.removeConstraint(
+      "users",
+      "fk_users_selected_avatar_id"
+    );
   },
 };
