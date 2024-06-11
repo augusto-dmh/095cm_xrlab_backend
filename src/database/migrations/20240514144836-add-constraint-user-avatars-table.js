@@ -9,8 +9,8 @@ module.exports = {
         table: "users",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+      onUpdate: "cascade",
+      onDelete: "cascade",
       name: "fk_user_avatars_user_id",
     });
 
@@ -21,14 +21,13 @@ module.exports = {
         table: "avatars",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+      onUpdate: "cascade",
+      onDelete: "cascade",
       name: "fk_user_avatars_avatar_id",
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint("user_avatars", "cpk_user_avatars");
     await queryInterface.removeConstraint(
       "user_avatars",
       "fk_user_avatars_user_id"

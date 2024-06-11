@@ -8,8 +8,8 @@ module.exports = {
         table: "users",
         field: "id",
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
+      onUpdate: "cascade",
+      onDelete: "cascade",
       name: "fk_photos_user_id",
     });
 
@@ -40,7 +40,5 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeConstraint("photos", "fk_photos_user_id");
-    await queryInterface.removeConstraint("photos", "latitude_range");
-    await queryInterface.removeConstraint("photos", "longitude_range");
   },
 };
