@@ -12,7 +12,6 @@ export default class User extends Model {
       {
         nickname: {
           type: DataTypes.STRING,
-          defaultValue: "",
           unique: {
             msg: errors.models.nickname.inUse,
           },
@@ -47,7 +46,6 @@ export default class User extends Model {
         },
         password: {
           type: DataTypes.STRING,
-          defaultValue: "",
         },
         xp: {
           type: DataTypes.INTEGER,
