@@ -9,8 +9,12 @@ const store = () => [
     .isFloat()
     .withMessage(errors.latitude.nonFloat)
     .bail()
-    .isLatitude()
-    .withMessage(errors.latitude.invalidRange),
+    .custom((value) => {
+      if (value < -90 || value > 90) {
+        throw new Error(errors.latitude.invalidRange);
+      }
+      return true;
+    }),
   body("longitude")
     .exists()
     .withMessage(errors.longitude.empty)
@@ -18,8 +22,12 @@ const store = () => [
     .isFloat()
     .withMessage(errors.longitude.nonFloat)
     .bail()
-    .isLongitude()
-    .withMessage(errors.longitude.invalidRange),
+    .custom((value) => {
+      if (value < -180 || value > 180) {
+        throw new Error(errors.longitude.invalidRange);
+      }
+      return true;
+    }),
 ];
 
 export default { store };
